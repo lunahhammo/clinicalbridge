@@ -1,0 +1,349 @@
+{
+  "evaluation_date": "2026-06-04T23:28:13.586403",
+  "prompt_version": "v2 (mock) / v3 (live)",
+  "mode": "mock",
+  "scenarios_pass": "5/5",
+  "total_checks_pass": "40/40",
+  "overall_score": 1.0,
+  "scenario_results": [
+    {
+      "scenario": 1,
+      "name": "The Missed Medication",
+      "patient_id": "PT001",
+      "pass": true,
+      "checks_pass": "8/8",
+      "score": 1.0,
+      "checks": [
+        {
+          "metric": "urgency_classification",
+          "expected": "Urgent",
+          "produced": "Urgent",
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "disclaimer_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Present"
+        },
+        {
+          "metric": "allergy_flag",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Not applicable"
+        },
+        {
+          "metric": "recommended_actions_completeness",
+          "expected": [
+            "arb",
+            "ibuprofen",
+            "clinical contact"
+          ],
+          "found": [
+            "arb",
+            "ibuprofen",
+            "clinical contact"
+          ],
+          "not_found": [],
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "conflicts_detected",
+          "score": 1.0,
+          "pass": true,
+          "detail": "1 conflict(s) flagged"
+        },
+        {
+          "metric": "source_citations_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "3 source tag(s) found in contextual_analysis"
+        },
+        {
+          "metric": "confidence_score_valid",
+          "score": 1.0,
+          "pass": true,
+          "detail": "confidence_score = 0.87"
+        },
+        {
+          "metric": "no_diagnostic_language",
+          "score": 1.0,
+          "pass": true,
+          "violations": []
+        }
+      ]
+    },
+    {
+      "scenario": 2,
+      "name": "The False Alarm",
+      "patient_id": "PT002",
+      "pass": true,
+      "checks_pass": "8/8",
+      "score": 1.0,
+      "checks": [
+        {
+          "metric": "urgency_classification",
+          "expected": "Informational",
+          "produced": "Informational",
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "disclaimer_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Present"
+        },
+        {
+          "metric": "allergy_flag",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Not applicable"
+        },
+        {
+          "metric": "recommended_actions_completeness",
+          "expected": [
+            "no immediate action"
+          ],
+          "found": [
+            "no immediate action"
+          ],
+          "not_found": [],
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "conflicts_detected",
+          "score": 1.0,
+          "pass": true,
+          "detail": "No conflict expected \u2014 not scored"
+        },
+        {
+          "metric": "source_citations_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "3 source tag(s) found in contextual_analysis"
+        },
+        {
+          "metric": "confidence_score_valid",
+          "score": 1.0,
+          "pass": true,
+          "detail": "confidence_score = 0.91"
+        },
+        {
+          "metric": "no_diagnostic_language",
+          "score": 1.0,
+          "pass": true,
+          "violations": []
+        }
+      ]
+    },
+    {
+      "scenario": 3,
+      "name": "The Silent Deterioration",
+      "patient_id": "PT003",
+      "pass": true,
+      "checks_pass": "8/8",
+      "score": 1.0,
+      "checks": [
+        {
+          "metric": "urgency_classification",
+          "expected": "Critical",
+          "produced": "Critical",
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "disclaimer_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Present"
+        },
+        {
+          "metric": "allergy_in_data_quality_warning",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Allergy conflict present in warning"
+        },
+        {
+          "metric": "recommended_actions_completeness",
+          "expected": [
+            "ibuprofen",
+            "clinical assessment",
+            "labs"
+          ],
+          "found": [
+            "ibuprofen",
+            "clinical assessment",
+            "labs"
+          ],
+          "not_found": [],
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "conflicts_detected",
+          "score": 1.0,
+          "pass": true,
+          "detail": "No conflict expected \u2014 not scored"
+        },
+        {
+          "metric": "source_citations_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "3 source tag(s) found in contextual_analysis"
+        },
+        {
+          "metric": "confidence_score_valid",
+          "score": 1.0,
+          "pass": true,
+          "detail": "confidence_score = 0.82"
+        },
+        {
+          "metric": "no_diagnostic_language",
+          "score": 1.0,
+          "pass": true,
+          "violations": []
+        }
+      ]
+    },
+    {
+      "scenario": 4,
+      "name": "The Incomplete Record",
+      "patient_id": "PT004",
+      "pass": true,
+      "checks_pass": "8/8",
+      "score": 1.0,
+      "checks": [
+        {
+          "metric": "urgency_classification",
+          "expected": "Urgent",
+          "produced": "Urgent",
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "disclaimer_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Present"
+        },
+        {
+          "metric": "allergy_flag",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Not applicable"
+        },
+        {
+          "metric": "recommended_actions_completeness",
+          "expected": [
+            "pseudoephedrine",
+            "clinical review"
+          ],
+          "found": [
+            "pseudoephedrine",
+            "clinical review"
+          ],
+          "not_found": [],
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "conflicts_detected",
+          "score": 1.0,
+          "pass": true,
+          "detail": "No conflict expected \u2014 not scored"
+        },
+        {
+          "metric": "source_citations_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "2 source tag(s) found in contextual_analysis"
+        },
+        {
+          "metric": "confidence_score_valid",
+          "score": 1.0,
+          "pass": true,
+          "detail": "confidence_score = 0.58"
+        },
+        {
+          "metric": "no_diagnostic_language",
+          "score": 1.0,
+          "pass": true,
+          "violations": []
+        }
+      ]
+    },
+    {
+      "scenario": 5,
+      "name": "The Conflicting Data",
+      "patient_id": "PT005",
+      "pass": true,
+      "checks_pass": "8/8",
+      "score": 1.0,
+      "checks": [
+        {
+          "metric": "urgency_classification",
+          "expected": "Urgent",
+          "produced": "Urgent",
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "disclaimer_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Present"
+        },
+        {
+          "metric": "allergy_flag",
+          "score": 1.0,
+          "pass": true,
+          "detail": "Not applicable"
+        },
+        {
+          "metric": "recommended_actions_completeness",
+          "expected": [
+            "adherence",
+            "alcohol",
+            "do not increase"
+          ],
+          "found": [
+            "adherence",
+            "alcohol",
+            "do not increase"
+          ],
+          "not_found": [],
+          "score": 1.0,
+          "pass": true
+        },
+        {
+          "metric": "conflicts_detected",
+          "score": 1.0,
+          "pass": true,
+          "detail": "1 conflict(s) flagged"
+        },
+        {
+          "metric": "source_citations_present",
+          "score": 1.0,
+          "pass": true,
+          "detail": "3 source tag(s) found in contextual_analysis"
+        },
+        {
+          "metric": "confidence_score_valid",
+          "score": 1.0,
+          "pass": true,
+          "detail": "confidence_score = 0.75"
+        },
+        {
+          "metric": "no_diagnostic_language",
+          "score": 1.0,
+          "pass": true,
+          "violations": []
+        }
+      ]
+    }
+  ]
+}

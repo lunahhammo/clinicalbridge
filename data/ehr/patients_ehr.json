@@ -1,0 +1,547 @@
+[
+  {
+    "patient_id": "PT001",
+    "demographics": {
+      "name": "Mehmet Yıldız",
+      "dob": "1958-03-12",
+      "age": 67,
+      "sex": "Male",
+      "weight_kg": 94,
+      "height_cm": 178
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2012-06-01", "status": "active"},
+      {"icd10": "E11.9", "description": "Type 2 diabetes mellitus without complications", "onset": "2015-01-15", "status": "active"},
+      {"icd10": "Z87.891", "description": "Personal history of nicotine dependence", "onset": "2008-01-01", "status": "resolved"}
+    ],
+    "medications": [
+      {"name": "Lisinopril", "dose": "10mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2019-03-01"},
+      {"name": "Metformin", "dose": "500mg", "frequency": "twice daily", "indication": "Type 2 Diabetes", "prescribed": "2015-01-20"},
+      {"name": "Aspirin", "dose": "81mg", "frequency": "once daily", "indication": "Cardiovascular prophylaxis", "prescribed": "2016-05-10"}
+    ],
+    "allergies": [
+      {"substance": "Penicillin", "reaction": "Rash", "severity": "Moderate"}
+    ],
+    "lab_results": [
+      {"test": "HbA1c", "value": 7.2, "unit": "%", "date": "2026-04-10", "reference_range": "4.0-5.6", "flag": "H"},
+      {"test": "eGFR", "value": 68, "unit": "mL/min/1.73m2", "date": "2026-04-10", "reference_range": ">60", "flag": "normal"},
+      {"test": "Serum Potassium", "value": 4.1, "unit": "mEq/L", "date": "2026-04-10", "reference_range": "3.5-5.0", "flag": "normal"},
+      {"test": "Serum Creatinine", "value": 1.1, "unit": "mg/dL", "date": "2026-04-10", "reference_range": "0.7-1.3", "flag": "normal"},
+      {"test": "Fasting Glucose", "value": 138, "unit": "mg/dL", "date": "2026-04-10", "reference_range": "70-99", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-04-10",
+        "provider": "Dr. Susan Okafor, MD",
+        "type": "Routine follow-up",
+        "note": "Patient presents for quarterly follow-up. BP measured at 138/88 mmHg in office. Patient reports occasional headaches. ACE inhibitor (Lisinopril) continued. Patient noted a persistent dry cough but attributed it to allergies. Advised to continue current medications and return in 3 months. HbA1c slightly elevated; reinforced dietary counseling."
+      },
+      {
+        "date": "2025-11-20",
+        "provider": "Dr. Susan Okafor, MD",
+        "type": "Routine follow-up",
+        "note": "BP 142/90 mmHg. Patient doing well overall. Lisinopril dose stable at 10mg. Mentioned cough occasionally but no change to regimen at this time. Lab work ordered."
+      }
+    ],
+    "scenario_tag": "scenario_1_missed_medication"
+  },
+  {
+    "patient_id": "PT002",
+    "demographics": {
+      "name": "Ayşe Kaya",
+      "dob": "1971-07-28",
+      "age": 54,
+      "sex": "Female",
+      "weight_kg": 72,
+      "height_cm": 162
+    },
+    "problem_list": [
+      {"icd10": "E11.65", "description": "Type 2 diabetes mellitus with hyperglycemia", "onset": "2010-03-01", "status": "active"},
+      {"icd10": "E78.5", "description": "Hyperlipidemia", "onset": "2013-08-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Metformin", "dose": "1000mg", "frequency": "twice daily", "indication": "Type 2 Diabetes", "prescribed": "2010-03-15"},
+      {"name": "Glipizide", "dose": "5mg", "frequency": "once daily with breakfast", "indication": "Type 2 Diabetes", "prescribed": "2022-06-01"},
+      {"name": "Atorvastatin", "dose": "20mg", "frequency": "once daily at bedtime", "indication": "Hyperlipidemia", "prescribed": "2014-01-10"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "HbA1c", "value": 7.8, "unit": "%", "date": "2026-03-15", "reference_range": "4.0-5.6", "flag": "H"},
+      {"test": "Fasting Glucose", "value": 152, "unit": "mg/dL", "date": "2026-03-15", "reference_range": "70-99", "flag": "H"},
+      {"test": "LDL Cholesterol", "value": 98, "unit": "mg/dL", "date": "2026-03-15", "reference_range": "<100", "flag": "normal"},
+      {"test": "eGFR", "value": 82, "unit": "mL/min/1.73m2", "date": "2026-03-15", "reference_range": ">60", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-03-15",
+        "provider": "Dr. Anita Rao, MD",
+        "type": "Diabetes management visit",
+        "note": "Patient managing diabetes adequately. Glipizide added last year due to suboptimal control. Recent dietary change discussed — patient is participating in a supervised low-carbohydrate dietary program starting this week, which may temporarily affect glucose readings. Medication adjustment considered but deferred pending dietary response. Glucose readings expected to vary during transition period."
+      }
+    ],
+    "scenario_tag": "scenario_2_false_alarm"
+  },
+  {
+    "patient_id": "PT003",
+    "demographics": {
+      "name": "Hasan Demir",
+      "dob": "1950-11-04",
+      "age": 75,
+      "sex": "Male",
+      "weight_kg": 88,
+      "height_cm": 172
+    },
+    "problem_list": [
+      {"icd10": "I50.9", "description": "Heart failure, unspecified", "onset": "2020-08-01", "status": "active"},
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2005-01-01", "status": "active"},
+      {"icd10": "I48.91", "description": "Unspecified atrial fibrillation", "onset": "2021-02-15", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Furosemide", "dose": "40mg", "frequency": "once daily", "indication": "Heart failure / fluid management", "prescribed": "2020-08-15"},
+      {"name": "Carvedilol", "dose": "6.25mg", "frequency": "twice daily", "indication": "Heart failure", "prescribed": "2020-09-01"},
+      {"name": "Lisinopril", "dose": "5mg", "frequency": "once daily", "indication": "Heart failure / Hypertension", "prescribed": "2020-09-01"},
+      {"name": "Apixaban", "dose": "5mg", "frequency": "twice daily", "indication": "Atrial fibrillation anticoagulation", "prescribed": "2021-02-20"}
+    ],
+    "allergies": [
+      {"substance": "NSAIDs", "reaction": "Fluid retention / worsening heart failure", "severity": "Severe"}
+    ],
+    "lab_results": [
+      {"test": "BNP", "value": 420, "unit": "pg/mL", "date": "2026-05-01", "reference_range": "<100", "flag": "H"},
+      {"test": "Serum Sodium", "value": 136, "unit": "mEq/L", "date": "2026-05-01", "reference_range": "136-145", "flag": "normal"},
+      {"test": "Serum Creatinine", "value": 1.4, "unit": "mg/dL", "date": "2026-05-01", "reference_range": "0.7-1.3", "flag": "H"},
+      {"test": "eGFR", "value": 52, "unit": "mL/min/1.73m2", "date": "2026-05-01", "reference_range": ">60", "flag": "L"},
+      {"test": "Body Weight", "value": 88, "unit": "kg", "date": "2026-05-01", "reference_range": "baseline 85kg", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-05-01",
+        "provider": "Dr. James Holloway, MD — Cardiology",
+        "type": "Heart failure clinic follow-up",
+        "note": "Patient stable at last visit. Weight 88kg (up from 85kg baseline). BNP elevated but below acute threshold. Patient instructed to weigh daily and report weight gain >2kg in 24h or >3kg in 1 week. Furosemide dose stable. Continue current regimen. Next visit in 4 weeks."
+      },
+      {
+        "date": "2026-02-10",
+        "provider": "Dr. James Holloway, MD",
+        "type": "Heart failure clinic follow-up",
+        "note": "Patient doing reasonably well. Weight stable at 85kg. BNP 310 pg/mL. Some mild ankle swelling reported, managed with elevation. No hospitalizations since initial HF diagnosis."
+      }
+    ],
+    "scenario_tag": "scenario_3_silent_deterioration"
+  },
+  {
+    "patient_id": "PT004",
+    "demographics": {
+      "name": "Elif Şahin",
+      "dob": "1965-05-19",
+      "age": 60,
+      "sex": "Female",
+      "weight_kg": 68,
+      "height_cm": 165
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2023-11-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Amlodipine", "dose": "5mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2023-11-15"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "Basic Metabolic Panel", "value": "Within normal limits", "unit": "panel", "date": "2023-11-15", "reference_range": "N/A", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2023-11-15",
+        "provider": "Dr. Patel, Primary Care (external facility — records transferred)",
+        "type": "New patient intake",
+        "note": "Patient recently relocated. Records partially transferred from prior provider. Hypertension diagnosed approximately 2 years ago. Started on Amlodipine 5mg. Full prior history unavailable pending records request from previous practice. No known allergies reported by patient."
+      }
+    ],
+    "scenario_tag": "scenario_4_incomplete_record"
+  },
+  {
+    "patient_id": "PT005",
+    "demographics": {
+      "name": "Kemal Aydın",
+      "dob": "1963-09-30",
+      "age": 62,
+      "sex": "Male",
+      "weight_kg": 102,
+      "height_cm": 182
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2011-04-01", "status": "active"},
+      {"icd10": "F10.20", "description": "Alcohol use disorder, uncomplicated", "onset": "2018-01-01", "status": "active"},
+      {"icd10": "E78.00", "description": "Pure hypercholesterolemia", "onset": "2014-06-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Metoprolol succinate", "dose": "50mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2022-01-10"},
+      {"name": "Rosuvastatin", "dose": "10mg", "frequency": "once daily", "indication": "Hypercholesterolemia", "prescribed": "2015-01-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "Metoprolol plasma level", "value": 28, "unit": "ng/mL", "date": "2026-05-20", "reference_range": "50-200 (therapeutic)", "flag": "L"},
+      {"test": "LDL Cholesterol", "value": 142, "unit": "mg/dL", "date": "2026-05-20", "reference_range": "<100", "flag": "H"},
+      {"test": "ALT", "value": 58, "unit": "U/L", "date": "2026-05-20", "reference_range": "7-56", "flag": "H"},
+      {"test": "GGT", "value": 112, "unit": "U/L", "date": "2026-05-20", "reference_range": "9-48", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-05-20",
+        "provider": "Dr. Susan Okafor, MD",
+        "type": "Hypertension management",
+        "note": "Patient presents for BP follow-up. BP 158/96 mmHg in office. Patient reports taking Metoprolol consistently. However, lab results show sub-therapeutic Metoprolol levels. Liver enzymes mildly elevated. GGT elevation may suggest alcohol use. Patient denies increased alcohol consumption. Discuss medication adherence and lifestyle factors at next visit."
+      }
+    ],
+    "scenario_tag": "scenario_5_conflicting_data"
+  },
+  {
+    "patient_id": "PT006",
+    "demographics": {
+      "name": "Beatrice Osei",
+      "dob": "1955-02-14",
+      "age": 71,
+      "sex": "Female",
+      "weight_kg": 78,
+      "height_cm": 160
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2009-01-01", "status": "active"},
+      {"icd10": "E11.9", "description": "Type 2 diabetes mellitus", "onset": "2014-05-01", "status": "active"},
+      {"icd10": "N18.3", "description": "Chronic kidney disease stage 3", "onset": "2022-09-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Losartan", "dose": "50mg", "frequency": "once daily", "indication": "Hypertension/CKD protection", "prescribed": "2022-10-01"},
+      {"name": "Insulin glargine", "dose": "20 units", "frequency": "once daily at bedtime", "indication": "Type 2 Diabetes", "prescribed": "2021-03-15"},
+      {"name": "Amlodipine", "dose": "5mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2019-06-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "eGFR", "value": 42, "unit": "mL/min/1.73m2", "date": "2026-04-20", "reference_range": ">60", "flag": "L"},
+      {"test": "Serum Potassium", "value": 5.3, "unit": "mEq/L", "date": "2026-04-20", "reference_range": "3.5-5.0", "flag": "H"},
+      {"test": "HbA1c", "value": 8.1, "unit": "%", "date": "2026-04-20", "reference_range": "4.0-5.6", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-04-20",
+        "provider": "Dr. Anita Rao, MD",
+        "type": "CKD + Diabetes co-management",
+        "note": "Patient with CKD stage 3 and diabetes, on Losartan. Potassium trending up — currently 5.3. Monitor closely. Advised low-potassium diet. eGFR declining slowly. Continue current regimen with close monitoring."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT007",
+    "demographics": {
+      "name": "Thomas Eriksson",
+      "dob": "1948-12-01",
+      "age": 77,
+      "sex": "Male",
+      "weight_kg": 80,
+      "height_cm": 175
+    },
+    "problem_list": [
+      {"icd10": "I50.32", "description": "Chronic systolic heart failure", "onset": "2018-05-01", "status": "active"},
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2003-01-01", "status": "active"},
+      {"icd10": "J44.1", "description": "COPD with acute exacerbation", "onset": "2015-07-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Furosemide", "dose": "80mg", "frequency": "once daily", "indication": "Heart failure", "prescribed": "2018-06-01"},
+      {"name": "Spironolactone", "dose": "25mg", "frequency": "once daily", "indication": "Heart failure", "prescribed": "2019-01-01"},
+      {"name": "Sacubitril/Valsartan", "dose": "97/103mg", "frequency": "twice daily", "indication": "Heart failure", "prescribed": "2020-03-01"},
+      {"name": "Tiotropium inhaler", "dose": "18mcg", "frequency": "once daily", "indication": "COPD", "prescribed": "2015-08-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "BNP", "value": 680, "unit": "pg/mL", "date": "2026-05-10", "reference_range": "<100", "flag": "H"},
+      {"test": "SpO2", "value": 93, "unit": "%", "date": "2026-05-10", "reference_range": ">95", "flag": "L"},
+      {"test": "Serum Sodium", "value": 133, "unit": "mEq/L", "date": "2026-05-10", "reference_range": "136-145", "flag": "L"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-05-10",
+        "provider": "Dr. James Holloway, MD",
+        "type": "Heart failure + COPD co-management",
+        "note": "Patient with complex HF and COPD. BNP elevated at 680. SpO2 borderline. Sodium slightly low. Avoid over-diuresis. COPD management ongoing. Careful medication balancing required."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT008",
+    "demographics": {
+      "name": "Grace Abara",
+      "dob": "1976-04-22",
+      "age": 50,
+      "sex": "Female",
+      "weight_kg": 85,
+      "height_cm": 168
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2016-09-01", "status": "active"},
+      {"icd10": "E66.9", "description": "Obesity, unspecified", "onset": "2016-09-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Hydrochlorothiazide", "dose": "25mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2016-09-15"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "Serum Potassium", "value": 3.4, "unit": "mEq/L", "date": "2026-03-01", "reference_range": "3.5-5.0", "flag": "L"},
+      {"test": "Fasting Glucose", "value": 108, "unit": "mg/dL", "date": "2026-03-01", "reference_range": "70-99", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-03-01",
+        "provider": "Dr. Susan Okafor, MD",
+        "type": "Hypertension follow-up",
+        "note": "BP 148/92 at visit. Potassium slightly low on HCTZ — advise dietary potassium. Pre-diabetes borderline fasting glucose. Reinforce lifestyle changes."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT009",
+    "demographics": {
+      "name": "Raymond Castillo",
+      "dob": "1942-08-17",
+      "age": 83,
+      "sex": "Male",
+      "weight_kg": 70,
+      "height_cm": 168
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2000-01-01", "status": "active"},
+      {"icd10": "I25.10", "description": "Atherosclerotic heart disease", "onset": "2012-03-01", "status": "active"},
+      {"icd10": "G30.9", "description": "Alzheimer's disease, unspecified", "onset": "2023-06-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Amlodipine", "dose": "10mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2018-04-01"},
+      {"name": "Aspirin", "dose": "81mg", "frequency": "once daily", "indication": "Cardiovascular prophylaxis", "prescribed": "2012-03-15"},
+      {"name": "Donepezil", "dose": "10mg", "frequency": "once daily at bedtime", "indication": "Alzheimer's disease", "prescribed": "2023-07-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "CBC", "value": "Within normal limits", "unit": "panel", "date": "2026-02-15", "reference_range": "N/A", "flag": "normal"},
+      {"test": "BMP", "value": "Within normal limits", "unit": "panel", "date": "2026-02-15", "reference_range": "N/A", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-02-15",
+        "provider": "Dr. Anita Rao, MD",
+        "type": "Geriatric follow-up",
+        "note": "Elderly patient with cognitive decline. Relies on caregiver for medication administration. BP controlled at 132/78 on Amlodipine 10mg. No acute issues today. Caregiver reports patient occasionally refuses medications. Cognitive status stable per MMSE."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT010",
+    "demographics": {
+      "name": "Linda Okonkwo",
+      "dob": "1968-01-05",
+      "age": 58,
+      "sex": "Female",
+      "weight_kg": 91,
+      "height_cm": 166
+    },
+    "problem_list": [
+      {"icd10": "E11.9", "description": "Type 2 diabetes mellitus", "onset": "2008-01-01", "status": "active"},
+      {"icd10": "E78.5", "description": "Mixed hyperlipidemia", "onset": "2010-01-01", "status": "active"},
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2012-01-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Empagliflozin", "dose": "10mg", "frequency": "once daily", "indication": "Type 2 Diabetes / CV risk reduction", "prescribed": "2023-01-01"},
+      {"name": "Metformin", "dose": "1000mg", "frequency": "twice daily", "indication": "Type 2 Diabetes", "prescribed": "2008-02-01"},
+      {"name": "Lisinopril", "dose": "20mg", "frequency": "once daily", "indication": "Hypertension / Diabetes nephroprotection", "prescribed": "2014-06-01"},
+      {"name": "Atorvastatin", "dose": "40mg", "frequency": "once daily", "indication": "Hyperlipidemia", "prescribed": "2010-02-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "HbA1c", "value": 7.0, "unit": "%", "date": "2026-04-05", "reference_range": "4.0-5.6", "flag": "H"},
+      {"test": "eGFR", "value": 74, "unit": "mL/min/1.73m2", "date": "2026-04-05", "reference_range": ">60", "flag": "normal"},
+      {"test": "LDL Cholesterol", "value": 88, "unit": "mg/dL", "date": "2026-04-05", "reference_range": "<100", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-04-05",
+        "provider": "Dr. Anita Rao, MD",
+        "type": "Diabetes + Cardiovascular risk review",
+        "note": "Patient well controlled on current regimen. HbA1c 7.0 — near target. BP 128/82. Empagliflozin providing dual benefit for glucose control and cardiovascular risk reduction. Continue current plan."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT011",
+    "demographics": {
+      "name": "Samuel Brinkmann",
+      "dob": "1952-06-30",
+      "age": 73,
+      "sex": "Male",
+      "weight_kg": 76,
+      "height_cm": 173
+    },
+    "problem_list": [
+      {"icd10": "I50.9", "description": "Heart failure, unspecified", "onset": "2021-11-01", "status": "active"},
+      {"icd10": "E11.9", "description": "Type 2 diabetes mellitus", "onset": "2016-01-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Furosemide", "dose": "40mg", "frequency": "once daily", "indication": "Heart failure", "prescribed": "2021-11-15"},
+      {"name": "Metoprolol succinate", "dose": "25mg", "frequency": "once daily", "indication": "Heart failure", "prescribed": "2021-11-15"},
+      {"name": "Lisinopril", "dose": "5mg", "frequency": "once daily", "indication": "Heart failure", "prescribed": "2021-12-01"},
+      {"name": "Metformin", "dose": "500mg", "frequency": "twice daily", "indication": "Type 2 Diabetes", "prescribed": "2016-02-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "BNP", "value": 290, "unit": "pg/mL", "date": "2026-04-25", "reference_range": "<100", "flag": "H"},
+      {"test": "HbA1c", "value": 7.5, "unit": "%", "date": "2026-04-25", "reference_range": "4.0-5.6", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-04-25",
+        "provider": "Dr. James Holloway, MD",
+        "type": "Heart failure follow-up",
+        "note": "Patient stable. BNP mildly elevated at 290. No acute decompensation. Continue current HF regimen. Diabetes management adequate."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT012",
+    "demographics": {
+      "name": "Patricia Sinclair",
+      "dob": "1980-03-08",
+      "age": 46,
+      "sex": "Female",
+      "weight_kg": 62,
+      "height_cm": 163
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2020-07-01", "status": "active"},
+      {"icd10": "F32.1", "description": "Major depressive disorder, single episode, moderate", "onset": "2021-03-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Ramipril", "dose": "5mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2020-07-15"},
+      {"name": "Sertraline", "dose": "50mg", "frequency": "once daily", "indication": "Major depressive disorder", "prescribed": "2021-04-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "Serum Sodium", "value": 138, "unit": "mEq/L", "date": "2026-03-10", "reference_range": "136-145", "flag": "normal"},
+      {"test": "TSH", "value": 2.1, "unit": "mIU/L", "date": "2026-03-10", "reference_range": "0.4-4.0", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-03-10",
+        "provider": "Dr. Susan Okafor, MD",
+        "type": "Hypertension + MDD follow-up",
+        "note": "BP controlled at 124/80. Patient reports improved mood on Sertraline. No drug interactions of concern between Ramipril and Sertraline at current doses. Continue current plan."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT013",
+    "demographics": {
+      "name": "Victor Pham",
+      "dob": "1945-10-11",
+      "age": 80,
+      "sex": "Male",
+      "weight_kg": 65,
+      "height_cm": 167
+    },
+    "problem_list": [
+      {"icd10": "E11.9", "description": "Type 2 diabetes mellitus", "onset": "2005-01-01", "status": "active"},
+      {"icd10": "N18.4", "description": "Chronic kidney disease, stage 4", "onset": "2024-01-01", "status": "active"},
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2001-01-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Insulin glargine", "dose": "24 units", "frequency": "once daily at bedtime", "indication": "Type 2 Diabetes", "prescribed": "2022-01-01"},
+      {"name": "Amlodipine", "dose": "5mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2015-01-01"}
+    ],
+    "allergies": [
+      {"substance": "Metformin", "reaction": "Contraindicated due to CKD stage 4", "severity": "Contraindication"}
+    ],
+    "lab_results": [
+      {"test": "eGFR", "value": 24, "unit": "mL/min/1.73m2", "date": "2026-05-05", "reference_range": ">60", "flag": "L"},
+      {"test": "HbA1c", "value": 8.4, "unit": "%", "date": "2026-05-05", "reference_range": "4.0-5.6", "flag": "H"},
+      {"test": "Serum Phosphorus", "value": 5.8, "unit": "mg/dL", "date": "2026-05-05", "reference_range": "2.5-4.5", "flag": "H"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-05-05",
+        "provider": "Dr. Anita Rao, MD / Nephrology co-management",
+        "type": "CKD stage 4 management",
+        "note": "Rapidly declining renal function. eGFR now 24. Referral to nephrology for pre-dialysis planning. Metformin contraindicated. Insulin management continues. Phosphorus elevated — dietary counseling and phosphate binder considered."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT014",
+    "demographics": {
+      "name": "Angela Torres",
+      "dob": "1970-11-22",
+      "age": 55,
+      "sex": "Female",
+      "weight_kg": 74,
+      "height_cm": 161
+    },
+    "problem_list": [
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2018-02-01", "status": "active"},
+      {"icd10": "M54.5", "description": "Low back pain", "onset": "2022-09-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Lisinopril", "dose": "5mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2018-02-15"},
+      {"name": "Naproxen", "dose": "500mg", "frequency": "as needed", "indication": "Low back pain", "prescribed": "2022-09-15"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "Serum Creatinine", "value": 0.9, "unit": "mg/dL", "date": "2026-01-20", "reference_range": "0.5-1.1", "flag": "normal"},
+      {"test": "Serum Potassium", "value": 4.0, "unit": "mEq/L", "date": "2026-01-20", "reference_range": "3.5-5.0", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-01-20",
+        "provider": "Dr. Susan Okafor, MD",
+        "type": "Hypertension follow-up",
+        "note": "BP 136/84. Note: patient using naproxen for back pain. NSAIDs can blunt antihypertensive effect of Lisinopril and increase sodium retention. Discussed minimizing NSAID use. Referred to physiotherapy for back pain."
+      }
+    ],
+    "scenario_tag": "general"
+  },
+  {
+    "patient_id": "PT015",
+    "demographics": {
+      "name": "Dwight Pearson",
+      "dob": "1956-07-04",
+      "age": 69,
+      "sex": "Male",
+      "weight_kg": 89,
+      "height_cm": 180
+    },
+    "problem_list": [
+      {"icd10": "E11.9", "description": "Type 2 diabetes mellitus", "onset": "2013-01-01", "status": "active"},
+      {"icd10": "I10", "description": "Essential hypertension", "onset": "2013-01-01", "status": "active"},
+      {"icd10": "Z96.641", "description": "Presence of right artificial hip joint", "onset": "2019-04-01", "status": "active"}
+    ],
+    "medications": [
+      {"name": "Sitagliptin", "dose": "100mg", "frequency": "once daily", "indication": "Type 2 Diabetes", "prescribed": "2020-01-01"},
+      {"name": "Metformin", "dose": "1000mg", "frequency": "twice daily", "indication": "Type 2 Diabetes", "prescribed": "2013-02-01"},
+      {"name": "Valsartan", "dose": "80mg", "frequency": "once daily", "indication": "Hypertension", "prescribed": "2018-05-01"}
+    ],
+    "allergies": [],
+    "lab_results": [
+      {"test": "HbA1c", "value": 7.3, "unit": "%", "date": "2026-03-20", "reference_range": "4.0-5.6", "flag": "H"},
+      {"test": "eGFR", "value": 71, "unit": "mL/min/1.73m2", "date": "2026-03-20", "reference_range": ">60", "flag": "normal"}
+    ],
+    "visit_notes": [
+      {
+        "date": "2026-03-20",
+        "provider": "Dr. Anita Rao, MD",
+        "type": "Diabetes + Hypertension follow-up",
+        "note": "Patient doing well. HbA1c 7.3 — acceptable. BP 130/82. Post-hip replacement with no complications. Continue current regimen."
+      }
+    ],
+    "scenario_tag": "general"
+  }
+]

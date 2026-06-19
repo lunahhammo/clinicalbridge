@@ -1,0 +1,57 @@
+patient_id,timestamp,device_type,measurement_type,value,unit,baseline,alert_threshold,alert_triggered,alert_category,notes
+PT001,2026-06-01T06:15:00,blood_pressure_monitor,systolic_bp,162,mmHg,138,155,True,elevated_bp,Morning reading
+PT001,2026-06-01T06:15:00,blood_pressure_monitor,diastolic_bp,104,mmHg,88,100,True,elevated_bp,Morning reading
+PT001,2026-06-01T06:20:00,blood_pressure_monitor,heart_rate,84,bpm,76,100,False,normal,
+PT001,2026-05-31T18:30:00,blood_pressure_monitor,systolic_bp,158,mmHg,138,155,True,elevated_bp,Evening reading
+PT001,2026-05-31T18:30:00,blood_pressure_monitor,diastolic_bp,100,mmHg,88,100,False,borderline,Just under threshold
+PT001,2026-05-30T07:00:00,blood_pressure_monitor,systolic_bp,165,mmHg,138,155,True,elevated_bp,Morning reading
+PT001,2026-05-30T07:00:00,blood_pressure_monitor,diastolic_bp,106,mmHg,88,100,True,elevated_bp,
+PT001,2026-05-29T07:05:00,blood_pressure_monitor,systolic_bp,148,mmHg,138,155,False,normal,
+PT001,2026-05-28T06:50:00,blood_pressure_monitor,systolic_bp,145,mmHg,138,155,False,normal,
+PT001,2026-05-27T06:55:00,blood_pressure_monitor,systolic_bp,142,mmHg,138,155,False,normal,
+PT002,2026-06-01T08:00:00,continuous_glucose_monitor,blood_glucose,218,mg/dL,150,200,True,hyperglycemia,Post-breakfast spike
+PT002,2026-06-01T07:30:00,continuous_glucose_monitor,blood_glucose,196,mg/dL,150,200,False,borderline,Pre-breakfast
+PT002,2026-06-01T06:00:00,continuous_glucose_monitor,blood_glucose,142,mg/dL,150,200,False,normal,Overnight fasting
+PT002,2026-05-31T20:00:00,continuous_glucose_monitor,blood_glucose,185,mg/dL,150,200,False,borderline,Post-dinner
+PT002,2026-05-31T08:00:00,continuous_glucose_monitor,blood_glucose,204,mg/dL,150,200,True,hyperglycemia,Post-breakfast first day of diet change
+PT002,2026-05-30T08:00:00,continuous_glucose_monitor,blood_glucose,155,mg/dL,150,200,False,normal,Before diet change
+PT002,2026-05-29T08:00:00,continuous_glucose_monitor,blood_glucose,148,mg/dL,150,200,False,normal,
+PT003,2026-06-01T07:00:00,connected_scale,body_weight,91.2,kg,85,87,True,weight_gain,3-day trend
+PT003,2026-05-31T07:10:00,connected_scale,body_weight,90.8,kg,85,87,True,weight_gain,
+PT003,2026-05-30T07:05:00,connected_scale,body_weight,90.1,kg,85,87,True,weight_gain,
+PT003,2026-05-29T07:00:00,connected_scale,body_weight,89.5,kg,85,87,True,weight_gain,
+PT003,2026-05-28T07:00:00,connected_scale,body_weight,88.8,kg,85,87,True,weight_gain,Crossed threshold
+PT003,2026-05-27T07:00:00,connected_scale,body_weight,88.0,kg,85,87,True,weight_gain,
+PT003,2026-05-26T07:00:00,connected_scale,body_weight,87.3,kg,85,87,True,weight_gain,
+PT003,2026-05-25T07:00:00,connected_scale,body_weight,86.8,kg,85,87,False,borderline,
+PT003,2026-05-24T07:00:00,connected_scale,body_weight,86.1,kg,85,87,False,borderline,
+PT003,2026-05-23T07:00:00,connected_scale,body_weight,85.5,kg,85,87,False,borderline,
+PT003,2026-05-22T07:00:00,connected_scale,body_weight,85.2,kg,85,87,False,normal,
+PT003,2026-05-21T07:00:00,connected_scale,body_weight,85.1,kg,85,87,False,normal,
+PT003,2026-05-20T07:00:00,connected_scale,body_weight,85.0,kg,85,87,False,normal,Baseline
+PT003,2026-06-01T07:00:00,pulse_oximeter,spo2,95,%,97,94,False,borderline,
+PT003,2026-06-01T07:00:00,blood_pressure_monitor,systolic_bp,148,mmHg,130,150,False,borderline,
+PT004,2026-06-01T08:30:00,blood_pressure_monitor,systolic_bp,168,mmHg,130,155,True,elevated_bp,Morning reading
+PT004,2026-06-01T08:30:00,blood_pressure_monitor,diastolic_bp,108,mmHg,82,100,True,elevated_bp,
+PT004,2026-05-31T09:00:00,blood_pressure_monitor,systolic_bp,172,mmHg,130,155,True,elevated_bp,
+PT004,2026-05-30T08:45:00,blood_pressure_monitor,systolic_bp,166,mmHg,130,155,True,elevated_bp,
+PT004,2026-05-29T08:30:00,blood_pressure_monitor,systolic_bp,160,mmHg,130,155,True,elevated_bp,
+PT005,2026-06-01T07:00:00,blood_pressure_monitor,systolic_bp,174,mmHg,145,160,True,elevated_bp,Morning reading
+PT005,2026-06-01T07:00:00,blood_pressure_monitor,diastolic_bp,112,mmHg,92,105,True,elevated_bp,
+PT005,2026-05-31T07:30:00,blood_pressure_monitor,systolic_bp,168,mmHg,145,160,True,elevated_bp,
+PT005,2026-05-30T07:00:00,blood_pressure_monitor,systolic_bp,171,mmHg,145,160,True,elevated_bp,
+PT005,2026-05-29T06:55:00,blood_pressure_monitor,systolic_bp,162,mmHg,145,160,True,elevated_bp,
+PT006,2026-06-01T06:30:00,blood_pressure_monitor,systolic_bp,144,mmHg,130,150,False,normal,
+PT006,2026-06-01T06:30:00,blood_pressure_monitor,diastolic_bp,88,mmHg,80,95,False,normal,
+PT006,2026-06-01T08:00:00,continuous_glucose_monitor,blood_glucose,168,mg/dL,140,180,False,normal,
+PT007,2026-06-01T06:00:00,pulse_oximeter,spo2,91,%,94,93,True,low_oxygen,Early morning
+PT007,2026-06-01T06:00:00,connected_scale,body_weight,83.4,kg,80,82,True,weight_gain,
+PT007,2026-05-31T06:00:00,pulse_oximeter,spo2,92,%,94,93,False,borderline,
+PT008,2026-06-01T07:00:00,blood_pressure_monitor,systolic_bp,152,mmHg,140,155,False,borderline,
+PT009,2026-06-01T07:00:00,blood_pressure_monitor,systolic_bp,128,mmHg,130,150,False,normal,Well controlled
+PT010,2026-06-01T07:00:00,continuous_glucose_monitor,blood_glucose,122,mg/dL,120,180,False,normal,
+PT011,2026-06-01T07:00:00,connected_scale,body_weight,77.5,kg,76,78,False,normal,
+PT012,2026-06-01T07:00:00,blood_pressure_monitor,systolic_bp,126,mmHg,125,150,False,normal,
+PT013,2026-06-01T06:30:00,continuous_glucose_monitor,blood_glucose,198,mg/dL,160,200,False,borderline,
+PT014,2026-06-01T07:00:00,blood_pressure_monitor,systolic_bp,140,mmHg,136,155,False,normal,
+PT015,2026-06-01T08:00:00,continuous_glucose_monitor,blood_glucose,142,mg/dL,130,180,False,normal,

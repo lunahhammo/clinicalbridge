@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+*.egg-info/
+
+# Environment
+.env
+venv/
+env/
+
+# ChromaDB vector store (generated locally by setup_vectorstore.py)
+data/chroma_db/
+
+# Logs
+logs/
+
+# OS
+.DS_Store
+Thumbs.db

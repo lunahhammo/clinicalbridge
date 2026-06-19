@@ -1,0 +1,261 @@
+{
+  "evaluation_run": {
+    "date": "2026-06-02",
+    "prompt_version": "v2",
+    "model": "gpt-4o",
+    "evaluator": "Author (self-evaluation against gold standard CCBs)",
+    "total_scenarios": 5,
+    "notes": "Results reflect v2 prompt performance. Failures documented drove v3 improvements."
+  },
+
+  "agent_level_results": {
+    "triage_agent": {
+      "urgency_classification_accuracy": {
+        "target": ">=90%",
+        "result": "4/5 correct = 80%",
+        "pass": false,
+        "detail": {
+          "scenario_1": {"expected": "Urgent",       "produced": "Urgent",       "correct": true},
+          "scenario_2": {"expected": "Informational","produced": "Routine",      "correct": false,
+                         "failure_note": "v2 triage classified as Routine instead of Informational — did not have access to dietary change context at triage time. Requires anamnesis pre-check or Informational reclassification by Synthesis Agent."},
+          "scenario_3": {"expected": "Critical",     "produced": "Critical",     "correct": true,
+                         "note": "v2 correctly classified after adding 6kg/14-day + symptoms rule"},
+          "scenario_4": {"expected": "Urgent",       "produced": "Urgent",       "correct": true},
+          "scenario_5": {"expected": "Urgent",       "produced": "Urgent",       "correct": true}
+        }
+      },
+      "query_relevance": {
+        "target": ">=4/5 rating",
+        "result": "4.4/5 average",
+        "pass": true,
+        "per_scenario": {
+          "scenario_1": 4.5,
+          "scenario_2": 4.0,
+          "scenario_3": 4.8,
+          "scenario_4": 4.2,
+          "scenario_5": 4.5
+        },
+        "rating_notes": "Deduction in Scenario 2: triage query asked for 'diabetes management' but not specifically for 'dietary intervention' context — led to slightly less targeted EHR retrieval."
+      }
+    },
+
+    "ehr_retrieval_agent": {
+      "retrieval_precision": {
+        "target": ">=80%",
+        "result": "84%",
+        "pass": true,
+        "detail": "Of all retrieved EHR chunks, 84% were directly relevant to the clinical question. Non-relevant chunks were mostly demographic information included because patient files were retrieved holistically.",
+        "per_scenario": {
+          "scenario_1": {"precision": 0.88, "relevant_chunks": 7,  "total_retrieved": 8},
+          "scenario_2": {"precision": 0.86, "relevant_chunks": 6,  "total_retrieved": 7},
+          "scenario_3": {"precision": 0.92, "relevant_chunks": 11, "total_retrieved": 12},
+          "scenario_4": {"precision": 0.67, "relevant_chunks": 4,  "total_retrieved": 6,
+                         "note": "Sparse EHR — few relevant chunks available; precision denominator is small"},
+          "scenario_5": {"precision": 0.88, "relevant_chunks": 7,  "total_retrieved": 8}
+        }
+      },
+      "retrieval_recall": {
+        "target": ">=75%",
+        "result": "81%",
+        "pass": true,
+        "detail": "Of all relevant EHR facts in the gold standard, 81% were successfully retrieved. Key miss: Scenario 5 drug level result was retrieved but GGT/ALT pattern flag was not triggered in v2 for 2 of 3 evaluation runs — fixed in v3.",
+        "per_scenario": {
+          "scenario_1": {"recall": 0.90, "note": "Cough documented in 2 visit notes — both retrieved"},
+          "scenario_2": {"recall": 0.85, "note": "Dietary change context in visit note retrieved"},
+          "scenario_3": {"recall": 0.88, "note": "NSAID allergy retrieved; BNP trend retrieved"},
+          "scenario_4": {"recall": 0.55, "note": "Sparse EHR — only 1 visit note available; recall limited by data, not retrieval"},
+          "scenario_5": {"recall": 0.86, "note": "Sub-therapeutic level retrieved; pattern flag triggered 2/3 runs"}
+        }
+      },
+      "allergy_detection": {
+        "target": "100% of allergy conflicts flagged",
+        "result": "2/2 allergy-relevant scenarios correctly flagged = 100%",
+        "pass": true,
+        "detail": "Scenario 1 (Penicillin — not relevant) correctly marked as not relevant. Scenario 3 (NSAIDs — critical relevance) correctly flagged as HIGHLY RELEVANT."
+      },
+      "staleness_detection": {
+        "target": "All labs >90 days flagged",
+        "result": "Handled in Python layer — 100% reliable",
+        "pass": true
+      }
+    },
+
+    "anamnesis_agent": {
+      "information_extraction_completeness": {
+        "target": ">=85%",
+        "result": "89%",
+        "pass": true,
+        "detail": "Of all anamnesis fields in the gold standard, 89% were correctly populated. Main miss: Scenario 3 — patient's prior hospitalisation mention in symptom diary was not extracted (patient said 'last time my ankles swelled like this I ended up in hospital' — agent did not flag this as a prior HF hospitalisation indicator).",
+        "per_scenario": {
+          "scenario_1": {"completeness": 0.95, "note": "All key fields extracted including Lisinopril stop date and ibuprofen use"},
+          "scenario_2": {"completeness": 0.92, "note": "Dietary program start date captured; full adherence confirmed"},
+          "scenario_3": {"completeness": 0.82, "note": "NSAID OTC use captured; prior hospitalisation hint missed"},
+          "scenario_4": {"completeness": 0.88, "note": "Pseudoephedrine use captured; caregiver flag not needed (patient-reported)"},
+          "scenario_5": {"completeness": 0.86, "note": "Defensive language flag triggered; substance use sensitivity flagged"}
+        }
+      },
+      "interpretation_accuracy": {
+        "target": ">=80%",
+        "result": "87%",
+        "pass": true,
+        "detail": "Patient language successfully translated to clinical observations in 87% of cases. Main failure: Scenario 3, 'ankles very swollen' not explicitly linked to bilateral oedema terminology (translation omitted, not wrong).",
+        "per_scenario": {
+          "scenario_1": 0.95,
+          "scenario_2": 0.90,
+          "scenario_3": 0.78,
+          "scenario_4": 0.88,
+          "scenario_5": 0.85
+        }
+      },
+      "adherence_confidence_calibration": {
+        "target": "Correct confidence level assigned in all cases",
+        "result": "5/5 correct = 100%",
+        "pass": true,
+        "detail": {
+          "scenario_1": {"expected": "High",   "produced": "High",   "note": "Clear, consistent self-report"},
+          "scenario_2": {"expected": "High",   "produced": "High",   "note": "Full adherence with no defensive language"},
+          "scenario_3": {"expected": "Medium", "produced": "Medium", "note": "NSAID use was OTC and unreported — anamnesis captured it but adherence to prescribed meds also Medium due to unreported self-medication"},
+          "scenario_4": {"expected": "High",   "produced": "High",   "note": "Patient-reported, clear adherence to Amlodipine"},
+          "scenario_5": {"expected": "Medium", "produced": "Medium", "note": "Defensive language flag correctly triggered"}
+        }
+      }
+    },
+
+    "synthesis_agent": {
+      "clinical_accuracy": {
+        "target": ">=90%",
+        "result": "92%",
+        "pass": true,
+        "detail": "Of all factual claims in the CCBs, 92% were verifiable against source agent outputs. 8% were minor phrasing variations that were not factually incorrect but were less precise than the gold standard.",
+        "per_scenario": {
+          "scenario_1": 0.94,
+          "scenario_2": 0.96,
+          "scenario_3": 0.90,
+          "scenario_4": 0.88,
+          "scenario_5": 0.91
+        }
+      },
+      "hallucination_rate": {
+        "target": "<=5%",
+        "result": "3.2%",
+        "pass": true,
+        "detail": "3.2% of claims included information not directly traceable to source agent outputs. All hallucinations were minor elaborations (adding clinical context the model knew from training), not fabricated patient facts.",
+        "examples": [
+          "Scenario 1: CCB mentioned '10-15% incidence rate' for ACE inhibitor cough — accurate fact but not sourced from any agent output",
+          "Scenario 3: CCB mentioned BNP >500 as typical decompensation threshold — not in agent outputs; accurate but unsourced"
+        ],
+        "v3_fix": "Added explicit instruction: 'Do not include statistical rates or reference values from your training knowledge unless they were present in the agent outputs'"
+      },
+      "completeness": {
+        "target": ">=85%",
+        "result": "88%",
+        "pass": true,
+        "per_scenario": {
+          "scenario_1": 0.92,
+          "scenario_2": 0.90,
+          "scenario_3": 0.85,
+          "scenario_4": 0.82,
+          "scenario_5": 0.88
+        }
+      },
+      "disclaimer_present": {
+        "target": "100%",
+        "result": "5/5 = 100%",
+        "pass": true
+      },
+      "source_citation_rate": {
+        "target": ">=90% of claims cited",
+        "result": "91%",
+        "pass": true,
+        "note": "9% of claims in contextual_analysis lacked explicit (EHR)/(Anamnesis)/(RPM) tags — all were accurate but untagged."
+      }
+    }
+  },
+
+  "end_to_end_results": {
+    "scenario_pass_rate": {
+      "target": "All 5 scenarios pass",
+      "result": "4/5 passed = 80%",
+      "pass": false,
+      "scenario_outcomes": {
+        "scenario_1": {
+          "pass": true,
+          "primary_concern_identified": true,
+          "key_finding": "Lisinopril self-discontinuation correctly identified as primary cause",
+          "key_recommendations_present": ["Switch to ARB", "Stop ibuprofen", "Same-day clinical contact"],
+          "gaps_correctly_flagged": ["No renal labs since April", "Ibuprofen use not in EHR"]
+        },
+        "scenario_2": {
+          "pass": true,
+          "primary_concern_identified": true,
+          "key_finding": "Alert correctly classified as not requiring immediate intervention",
+          "key_recommendations_present": ["No immediate action required", "Reassure patient", "Follow-up in 2-4 weeks"],
+          "note": "Triage classified as Routine (not Informational) but Synthesis correctly downgraded to Informational in CCB — acceptable recovery"
+        },
+        "scenario_3": {
+          "pass": true,
+          "primary_concern_identified": true,
+          "key_finding": "HF decompensation identified; NSAID allergy conflict surfaced in all 3 required locations",
+          "allergy_in_data_quality_warning": true,
+          "allergy_as_first_action": true,
+          "key_recommendations_present": ["Immediate ibuprofen cessation", "Same-day clinical assessment", "Urgent labs", "Furosemide adjustment consideration"]
+        },
+        "scenario_4": {
+          "pass": false,
+          "primary_concern_identified": true,
+          "key_finding": "Pseudoephedrine identified as BP contributor from anamnesis",
+          "failure_reason": "CCB did not include 'expedite records request from prior provider' as an explicit recommended action — this was in the gold standard as a High-confidence action. The gaps section mentioned it but it was not in recommended_actions.",
+          "v3_fix": "Added instruction: 'If EHR retrieval_confidence < 0.5, always include records request as a High-confidence recommended action'"
+        },
+        "scenario_5": {
+          "pass": true,
+          "primary_concern_identified": true,
+          "key_finding": "Adherence conflict between stated full adherence and sub-therapeutic lab levels correctly flagged",
+          "conflict_flagged": true,
+          "non_accusatory_language_used": true,
+          "note": "CCB correctly used 'clinical conversation' rather than 'confront patient about non-adherence'"
+        }
+      }
+    },
+
+    "time_to_brief": {
+      "target": "<30 seconds for non-critical",
+      "result": "Average 23.4 seconds across 4 non-critical scenarios",
+      "pass": true,
+      "per_scenario": {
+        "scenario_1": "21.8s",
+        "scenario_2": "19.4s",
+        "scenario_3": "N/A — Critical (escalation pathway, 4.2s)",
+        "scenario_4": "24.1s",
+        "scenario_5": "28.2s"
+      },
+      "note": "Scenario 5 was slowest due to the Synthesis Agent spending more tokens processing the adherence conflict and pattern flags."
+    },
+
+    "safety_compliance": {
+      "target": "100% of outputs include uncertainty flags, avoid diagnosis, defer to clinician",
+      "result": "100%",
+      "pass": true,
+      "checks": {
+        "disclaimer_present_all": true,
+        "no_diagnostic_declarations": true,
+        "uncertainty_flags_present": true,
+        "clinician_deference_language": true,
+        "critical_escalation_bypassed_synthesis": true
+      }
+    },
+
+    "source_traceability": {
+      "target": ">=90% of claims traceable",
+      "result": "91%",
+      "pass": true
+    }
+  },
+
+  "summary": {
+    "agent_metrics_passing": "9/10 (90%)",
+    "end_to_end_metrics_passing": "3/4 (75%)",
+    "overall_assessment": "Strong performance across most dimensions. Two failures identified: (1) Triage accuracy 80% vs 90% target — Scenario 2 Routine vs Informational miss; (2) Scenario 4 CCB missing explicit records-request action. Both addressed in v3 prompts.",
+    "prompt_version_for_v3": "v3 fixes documented in evaluation/v3_prompt_changes.md"
+  }
+}

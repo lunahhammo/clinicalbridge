@@ -1,0 +1,214 @@
+{
+  "scenario_1_missed_medication": {
+    "patient_id": "PT001",
+    "scenario_name": "The Missed Medication",
+    "gold_standard_ccb": {
+      "alert_summary": {
+        "trigger": "RPM alert: Sustained elevated blood pressure. Systolic BP 162 mmHg (threshold 155 mmHg), diastolic 104 mmHg (threshold 100 mmHg) on morning of 2026-06-01. Three consecutive elevated readings over 3 days (165, 158, 162 systolic).",
+        "urgency_classification": "Urgent",
+        "rationale": "Sustained Stage 2 hypertension (>160/100) over multiple days in a patient with diabetes, family history of stroke, and recent NSAID use. Not immediately life-threatening but requires same-day clinical response."
+      },
+      "patient_snapshot": {
+        "name": "Mehmet Yıldız, 67M",
+        "active_conditions": ["Essential hypertension (I10)", "Type 2 diabetes mellitus (E11.9)"],
+        "current_treatment_plan": "Lisinopril 10mg daily, Metformin 500mg BID, Aspirin 81mg daily",
+        "baseline_bp": "138/88 mmHg (last office visit 2026-04-10)"
+      },
+      "contextual_analysis": {
+        "primary_finding": "Patient self-discontinued Lisinopril approximately 10 days ago (est. 2026-05-22) due to ACE inhibitor-induced dry cough — a well-recognised side effect (incidence 10-15%). This explains the sustained BP elevation observed in RPM data.",
+        "contributing_factors": [
+          "NSAID use: Patient self-administering ibuprofen 400mg for headaches over past 3 days. NSAIDs reduce antihypertensive efficacy and cause sodium retention — compounding BP elevation.",
+          "High sodium diet: Acknowledged by patient in anamnesis. Additive effect on BP.",
+          "Prior visit documentation: Lisinopril cough was noted at visits of 2026-04-10 and 2025-11-20 but no medication change was initiated — missed opportunity to address adherence risk.",
+          "Family history: Father had stroke at 71; current BP trajectory is clinically concerning."
+        ],
+        "timeline": "BP was within elevated-but-stable range (142-145 systolic) until Lisinopril was stopped. Over the subsequent 10 days BP has risen to 162-165 systolic, consistent with the loss of ACE inhibitor effect."
+      },
+      "risk_assessment": {
+        "immediate_risks": "Sustained Stage 2 hypertension with diabetes. Headaches and dizziness may represent hypertensive symptoms. NSAID use adds nephrotoxicity risk given diabetic context.",
+        "medium_term_risks": "Family history of stroke at similar age. Suboptimal BP control with concurrent diabetes significantly increases cardiovascular and cerebrovascular risk.",
+        "differential_considerations": "ACE inhibitor discontinuation (primary cause). NSAID-mediated BP elevation (contributing). High sodium intake (contributing). Stress or secondary hypertension less likely given clear temporal relationship to Lisinopril cessation."
+      },
+      "recommended_actions": [
+        {"action": "Switch ACE inhibitor to ARB (e.g., Losartan or Valsartan) — equivalent BP efficacy without cough side effect", "confidence": "High", "evidence": "EHR: Lisinopril cough documented twice. Anamnesis: patient confirms cough as reason for self-discontinuation."},
+        {"action": "Advise patient to discontinue ibuprofen immediately — consider paracetamol for headaches", "confidence": "High", "evidence": "Anamnesis: self-reporting ibuprofen use. NSAID contraindicated with hypertension and diabetes."},
+        {"action": "Same-day or next-day clinical contact to initiate ARB and confirm medication transition", "confidence": "High", "evidence": "Sustained Stage 2 HTN over 3 days with symptomatic headaches."},
+        {"action": "Dietary sodium counseling reinforcement", "confidence": "Moderate", "evidence": "Anamnesis confirms high-sodium diet."}
+      ],
+      "uncertainties_and_gaps": [
+        "Exact date Lisinopril was stopped is patient-estimated (~10 days ago) — not independently verifiable from EHR",
+        "No renal function labs since April 10 — creatinine and potassium should be checked before initiating ARB",
+        "Patient's ibuprofen use was not captured in EHR — anamnesis is the sole source"
+      ]
+    }
+  },
+  "scenario_2_false_alarm": {
+    "patient_id": "PT002",
+    "scenario_name": "The False Alarm",
+    "gold_standard_ccb": {
+      "alert_summary": {
+        "trigger": "CGM alert: Blood glucose 218 mg/dL at 08:00 on 2026-06-01 (threshold 200 mg/dL). One prior threshold breach on 2026-05-31 (204 mg/dL).",
+        "urgency_classification": "Informational",
+        "rationale": "Glucose alert in context of a clinician-supervised dietary intervention with anticipated transient glycaemic fluctuation. No acute safety concern identified."
+      },
+      "patient_snapshot": {
+        "name": "Ayşe Kaya, 54F",
+        "active_conditions": ["Type 2 diabetes mellitus (E11.65)", "Hyperlipidemia (E78.5)"],
+        "current_treatment_plan": "Metformin 1000mg BID, Glipizide 5mg daily with breakfast, Atorvastatin 20mg at bedtime",
+        "baseline_glucose": "Fasting glucose 152 mg/dL; HbA1c 7.8% (March 2026)"
+      },
+      "contextual_analysis": {
+        "primary_finding": "CGM alert is contextually explained by a supervised low-carbohydrate dietary intervention initiated 2026-05-26, documented in both the clinic visit note (2026-03-15) and the patient's anamnesis. Post-prandial glucose elevation during the adaptation period is an expected and documented consequence of this dietary approach.",
+        "supporting_evidence": [
+          "EHR (2026-03-15): Physician explicitly documented planned dietary change and noted glucose values may vary during transition period.",
+          "Anamnesis: Patient reports full medication adherence and understands glucose fluctuation is anticipated per nutritionist guidance.",
+          "RPM trend: Pre-dietary change baseline glucose 148-155 mg/dL. Post-change elevations are post-prandial, with overnight/fasting values remaining lower (142 mg/dL at 06:00 on 2026-06-01)."
+        ],
+        "pattern_analysis": "Post-prandial spikes are occurring; fasting glucose is stable. This pattern is consistent with dietary carbohydrate loading early in a low-carb transition, not with uncontrolled hyperglycaemia."
+      },
+      "risk_assessment": {
+        "immediate_risks": "Low. No symptoms of acute hyperglycaemia reported. Glucose values, while elevated, are not in the dangerous range (no DKA risk at these levels for T2DM).",
+        "medium_term_risks": "Monitor HbA1c in 8-12 weeks to assess impact of dietary intervention. If glucose does not improve within 4 weeks, medication adjustment may be warranted.",
+        "differential_considerations": "True glycaemic deterioration (lower probability given documented dietary context). Medication non-adherence (ruled out by anamnesis). Infection or illness (no symptoms reported)."
+      },
+      "recommended_actions": [
+        {"action": "No acute intervention required for this alert", "confidence": "High", "evidence": "EHR and anamnesis consistently explain the glucose elevation as expected and supervised."},
+        {"action": "Acknowledge alert to patient and reassure regarding expected dietary transition", "confidence": "High", "evidence": "Patient already aware but clinical confirmation appropriate."},
+        {"action": "Schedule glucose trend review in 2-4 weeks to confirm expected improvement", "confidence": "High", "evidence": "Standard follow-up for supervised dietary interventions affecting glucose."}
+      ],
+      "uncertainties_and_gaps": [
+        "Nutritionist intake records not available in EHR — anamnesis is sole source of dietary program details",
+        "No HbA1c since March 2026 — timing of next check should be planned"
+      ]
+    }
+  },
+  "scenario_3_silent_deterioration": {
+    "patient_id": "PT003",
+    "scenario_name": "The Silent Deterioration",
+    "gold_standard_ccb": {
+      "alert_summary": {
+        "trigger": "RPM alert: Connected scale reading 91.2 kg on 2026-06-01, compared to baseline 85 kg — a gain of 6.2 kg over 13 days. Daily readings show a consistent upward trend with no plateau.",
+        "urgency_classification": "Critical",
+        "rationale": "6.2 kg weight gain over 13 days in a patient with diagnosed heart failure, combined with self-reported ankle swelling, exertional dyspnoea, and NSAID use (known to worsen fluid retention in HF) constitutes a probable acute HF decompensation requiring urgent clinical assessment."
+      },
+      "patient_snapshot": {
+        "name": "Hasan Demir, 75M",
+        "active_conditions": ["Heart failure (I50.9)", "Essential hypertension (I10)", "Atrial fibrillation (I48.91)"],
+        "current_treatment_plan": "Furosemide 40mg daily, Carvedilol 6.25mg BID, Lisinopril 5mg daily, Apixaban 5mg BID",
+        "documented_allergy_warning": "ALLERGY: NSAIDs — documented severe reaction: fluid retention and worsening heart failure"
+      },
+      "contextual_analysis": {
+        "primary_finding": "Progressive fluid retention consistent with acute heart failure decompensation. Weight gain has been continuous over 13 days (0.47 kg/day average), with patient crossing the 2 kg/7-day threshold documented in the care plan as a trigger for clinical contact on approximately 2026-05-27.",
+        "critical_medication_concern": "ALLERGY CONFLICT: Patient self-reports taking ibuprofen 2-3 times over the past week for knee joint pain. EHR documents a documented ALLERGY to NSAIDs with noted reaction of 'fluid retention and worsening heart failure'. NSAID use is likely a significant contributing cause of decompensation.",
+        "contributing_factors": [
+          "NSAID use (ibuprofen) — directly contraindicated, likely contributing to fluid retention",
+          "Furosemide dose may be inadequate given current fluid load",
+          "High-sodium restaurant meal approximately 10 days ago — temporally coincides with onset of weight gain trend",
+          "EHR baseline BNP 420 pg/mL at May 2026 visit — already elevated prior to this decompensation",
+          "Baseline creatinine 1.4 mg/dL — impaired renal function may reduce diuretic efficacy"
+        ],
+        "patient_history_context": "Prior hospitalisation for HF decompensation mentioned by patient in anamnesis. Patient is aware of his sentinel symptom pattern."
+      },
+      "risk_assessment": {
+        "immediate_risks": "Acute HF decompensation. Bilateral ankle oedema and exertional dyspnoea are decompensation symptoms. Risk of further deterioration requiring hospital admission if not addressed today.",
+        "critical_alerts": "NSAID allergy violation — ibuprofen use must be addressed immediately. Apixaban on board — anticoagulation status relevant if hospitalisation or procedures are required.",
+        "differential_considerations": "Primary: acute HF decompensation (weight gain + oedema + dyspnoea + NSAID use in HF patient). Secondary: renal deterioration (creatinine already elevated). Less likely: dietary sodium alone without medication contribution."
+      },
+      "recommended_actions": [
+        {"action": "Urgent same-day clinical assessment — patient should be seen today", "confidence": "High", "evidence": "6.2kg weight gain, ankle oedema, new exertional dyspnoea, NSAID allergy violation."},
+        {"action": "Immediate cessation of ibuprofen — ALLERGY CONFLICT", "confidence": "High", "evidence": "EHR allergy record explicitly lists NSAIDs as contraindicated. Anamnesis confirms recent use."},
+        {"action": "Consider Furosemide dose adjustment — clinician decision required", "confidence": "Moderate", "evidence": "Current dose 40mg may be insufficient given degree of fluid overload. Renal function must be checked first."},
+        {"action": "Urgent BNP and renal panel (creatinine, BUN, electrolytes)", "confidence": "High", "evidence": "Baseline creatinine already elevated; diuretic adjustment requires safe renal monitoring."}
+      ],
+      "uncertainties_and_gaps": [
+        "Ibuprofen use frequency is patient-reported ('2-3 times over the past week') — exact dosing and timing not confirmed",
+        "No BNP measurement since 2026-05-01 — current level unknown",
+        "SpO2 reading 95% on 2026-06-01 is borderline — trend data would be valuable"
+      ]
+    }
+  },
+  "scenario_4_incomplete_record": {
+    "patient_id": "PT004",
+    "scenario_name": "The Incomplete Record",
+    "gold_standard_ccb": {
+      "alert_summary": {
+        "trigger": "RPM alert: Sustained elevated BP — systolic 168 mmHg on 2026-06-01 (threshold 155 mmHg). Four consecutive elevated readings over 4 days (160, 166, 172, 168 systolic).",
+        "urgency_classification": "Urgent",
+        "rationale": "Stage 2 hypertension sustained over 4 days. EHR is sparse — limited clinical history available to contextualise alert. Multiple potentially BP-elevating factors identified in anamnesis."
+      },
+      "patient_snapshot": {
+        "name": "Elif Şahin, 60F",
+        "active_conditions": ["Essential hypertension (I10) — onset 2023, likely longer per patient history"],
+        "current_treatment_plan": "Amlodipine 5mg once daily",
+        "data_quality_warning": "EHR IS SPARSE — patient transferred from external provider approximately 2.5 years ago. Full prior records not yet received. Diagnosis history, full medication history, and family history are incomplete."
+      },
+      "contextual_analysis": {
+        "primary_finding": "Sustained BP elevation with multiple contributing factors identified from anamnesis in the absence of EHR context.",
+        "anamnesis_derived_findings": [
+          "OTC pseudoephedrine-based decongestant: Patient has been taking cold medication for 5 days. Pseudoephedrine is a sympathomimetic that causes dose-dependent BP elevation — this is a likely significant contributor.",
+          "Psychosocial stress: Patient is under significant family stress (caretaking ill parent) and reporting poor sleep for 1 week. Stress-mediated sympathetic activation elevates BP.",
+          "Medication compliance confirmed: Patient reports taking Amlodipine daily."
+        ],
+        "ehr_limitations": "EHR contains only 1 visit note from 2023. No prior labs, no full medication history, no prior BP trend data, no family history detail. Clinical decision-making is significantly constrained by data sparsity."
+      },
+      "risk_assessment": {
+        "immediate_risks": "Stage 2 hypertension over 4 days with identifiable precipitants. Pseudoephedrine and stress are both reversible. However, incomplete EHR means unknown cardiovascular history cannot be excluded.",
+        "unknown_risk_factors": "Family history unknown (patient adopted). Prior cardiovascular events unknown. Full allergy history unknown. Secondary causes of hypertension cannot be excluded without further workup.",
+        "differential_considerations": "Pseudoephedrine-induced BP elevation (likely primary contributor). Stress/sleep deprivation. Amlodipine dose inadequacy (possible — only 5mg, room for titration). Secondary hypertension — cannot exclude without further data."
+      },
+      "recommended_actions": [
+        {"action": "Advise patient to stop pseudoephedrine-based cold medication immediately and switch to saline nasal spray or non-decongestant alternatives", "confidence": "High", "evidence": "Anamnesis: 5-day decongestant use temporally correlated with BP elevation. Pseudoephedrine contraindicated in hypertension."},
+        {"action": "Clinical review within 24-48 hours to reassess BP after pseudoephedrine cessation", "confidence": "High", "evidence": "Reversible cause identified — response to removal should guide next steps."},
+        {"action": "Expedite records request from prior provider — full medical and medication history required", "confidence": "High", "evidence": "EHR critically incomplete. Clinical safety requires full history."},
+        {"action": "Consider Amlodipine dose increase to 10mg if BP remains elevated after removing reversible factors", "confidence": "Moderate", "evidence": "Clinician judgement required pending full history and BP response."}
+      ],
+      "uncertainties_and_gaps": [
+        "Prior medical history, prior cardiovascular events, complete allergy history — all unknown due to incomplete EHR",
+        "Family history unknown — patient adopted, biological family history unavailable",
+        "Whether 'hypertension diagnosed approximately 2 years ago' is accurate — patient uncertain of timeline",
+        "All recommendations based heavily on anamnesis data. EHR provides minimal corroboration."
+      ]
+    }
+  },
+  "scenario_5_conflicting_data": {
+    "patient_id": "PT005",
+    "scenario_name": "The Conflicting Data",
+    "gold_standard_ccb": {
+      "alert_summary": {
+        "trigger": "RPM alert: Sustained elevated BP — systolic 174 mmHg on 2026-06-01 (threshold 160 mmHg), diastolic 112 mmHg. Four consecutive elevated readings over 4 days.",
+        "urgency_classification": "Urgent",
+        "rationale": "Stage 2 hypertension despite claimed medication adherence. Sub-therapeutic drug levels documented in recent labs — significant discrepancy between patient self-report and objective clinical data."
+      },
+      "patient_snapshot": {
+        "name": "Kemal Aydın, 62M",
+        "active_conditions": ["Essential hypertension (I10)", "Alcohol use disorder (F10.20)", "Hypercholesterolemia (E78.00)"],
+        "current_treatment_plan": "Metoprolol succinate 50mg daily, Rosuvastatin 10mg daily",
+        "baseline_bp": "158/96 mmHg (last office visit 2026-05-20 — already elevated)"
+      },
+      "contextual_analysis": {
+        "primary_finding": "OBJECTIVE-SUBJECTIVE DISCREPANCY: Patient reports full adherence to Metoprolol but plasma Metoprolol level on 2026-05-20 was 28 ng/mL — below the therapeutic range of 50-200 ng/mL. This sub-therapeutic level is inconsistent with consistent daily dosing.",
+        "data_conflict": "Patient statement: 'I take it every single morning, I never miss it.' EHR lab data: Metoprolol plasma level 28 ng/mL (sub-therapeutic). These two data points are in direct conflict. Possible explanations include: medication non-adherence (most likely), rapid metabolism (pharmacogenomic consideration), or timing artifact (blood drawn shortly after last dose — though this would typically produce a higher not lower level).",
+        "secondary_concern": "Elevated liver enzymes (ALT 58, GGT 112) and documented alcohol use disorder history. GGT elevation is particularly associated with alcohol consumption. Patient is defensive about alcohol use in anamnesis. LDL elevated at 142 despite Rosuvastatin — possible adherence issue with statin as well, or alcohol-mediated dyslipidaemia.",
+        "behavioural_context": "Patient is defensive, lives alone, has a history of alcohol use disorder, and is under work stress. These are risk factors for both non-adherence and underreported alcohol consumption."
+      },
+      "risk_assessment": {
+        "immediate_risks": "Stage 2 hypertension. BP has been inadequately controlled for an extended period (office visit 2026-05-20 also showed 158/96). Elevated liver enzymes in context of alcohol use disorder may indicate hepatic involvement.",
+        "medium_term_risks": "Continued sub-therapeutic antihypertensive treatment. Unaddressed alcohol use disorder contributing to BP elevation (alcohol is a dose-dependent hypertensive agent), dyslipidaemia, and hepatic injury.",
+        "differential_considerations": "Medication non-adherence (primary hypothesis for sub-therapeutic levels). Uncontrolled or underreported alcohol use contributing to hypertension and abnormal liver function. Pharmacogenomic rapid metabolism (secondary consideration — less likely without other evidence)."
+      },
+      "recommended_actions": [
+        {"action": "Clinical conversation regarding medication adherence — non-confrontational approach recommended", "confidence": "High", "evidence": "Sub-therapeutic Metoprolol level on objective labs vs patient's stated adherence. Clinician should address discrepancy sensitively."},
+        {"action": "Reassess alcohol use — consider validated screening tool (AUDIT-C) in clinical consultation", "confidence": "High", "evidence": "Documented alcohol use disorder + elevated GGT + defensive anamnesis response + living alone = multiple risk factors for underreported alcohol consumption."},
+        {"action": "Repeat liver function tests to establish trend", "confidence": "High", "evidence": "ALT and GGT elevated on 2026-05-20 labs. Trend data needed."},
+        {"action": "Consider medication switch or adherence support if non-adherence confirmed — e.g., once-daily blister pack, pharmacy compliance program", "confidence": "Moderate", "evidence": "If adherence is confirmed as the issue."},
+        {"action": "Do NOT increase Metoprolol dose solely based on elevated BP without first confirming adherence", "confidence": "High", "evidence": "Dose increase in a non-adherent patient with alcohol use disorder would be inappropriate and potentially unsafe."}
+      ],
+      "uncertainties_and_gaps": [
+        "IMPORTANT: This brief flags a discrepancy between patient-reported adherence and objective lab data. It does NOT accuse the patient of lying or non-adherence — this determination requires clinical judgment and direct patient conversation.",
+        "Exact alcohol consumption is unknown — patient self-report is likely an underestimate given history and defensive presentation",
+        "Timing of blood draw relative to last Metoprolol dose not recorded in EHR — should be clarified",
+        "Rosuvastatin adherence not independently verifiable — LDL elevation may reflect non-adherence, diet, or alcohol effect"
+      ]
+    }
+  }
+}

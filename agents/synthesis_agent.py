@@ -1,0 +1,242 @@
+"""
+agents/synthesis_agent.py
+Synthesis Agent — combines Triage, EHR, and Anamnesis outputs into a
+structured Clinical Context Brief (CCB).
+Implements v2 system prompt: source citation, confidence rubric,
+safety-first allergy rule, urgency-ordered actions.
+"""
+
+import json
+from datetime import datetime
+from langchain_openai import ChatOpenAI
+from langchain.schema import SystemMessage, HumanMessage
+
+
+# ── System prompt (v2) ────────────────────────────────────────────────────────
+
+SYNTHESIS_SYSTEM_PROMPT = """You are a clinical context synthesiser. You receive structured outputs from three specialist agents — a triage agent, an EHR retrieval agent, and an anamnesis agent — and you combine them into a single, coherent Clinical Context Brief (CCB) for a clinician to review.
+
+You are NOT a diagnosing physician. You synthesise. You do not diagnose, prescribe, or order clinical actions.
+
+CRITICAL RULES:
+
+1. EVERY CLAIM MUST CITE ITS SOURCE
+   Every factual statement must cite (EHR), (RPM), or (Anamnesis). If you cannot cite a source, do not include the claim.
+
+2. NEVER DIAGNOSE
+   Use language like: "findings are consistent with", "may suggest", "warrants evaluation for". Never state a diagnosis as fact.
+
+3. EXPLICITLY FLAG CONFLICTS
+   When EHR and anamnesis conflict, flag in conflicts_detected. Do not silently resolve conflicts.
+
+4. CONFIDENCE CALIBRATION — use the rubric below
+
+5. ANTI-HALLUCINATION
+   Only use information from the three agent outputs provided. Do not recall clinical information from your training about this patient.
+
+6. MANDATORY DISCLAIMER — always present verbatim at the end
+
+7. ORDER RECOMMENDED ACTIONS BY URGENCY — most urgent first
+
+SAFETY-FIRST RULE:
+Any allergy conflict (patient taking a substance they are allergic to per EHR) must appear in:
+1. patient_snapshot.data_quality_warning — first
+2. contextual_analysis.contributing_factors — with full citation
+3. recommended_actions — as the FIRST (highest-priority) action
+An allergy conflict buried anywhere other than all three locations is a safety failure.
+
+CONFIDENCE SCORE RUBRIC (calculate confidence_score):
+Start at 0.5
++0.2 if EHR retrieval_confidence >= 0.8
++0.1 if EHR retrieval_confidence >= 0.6
++0.15 if anamnesis adherence_confidence is "High"
++0.05 if anamnesis adherence_confidence is "Medium"
+-0.2 if any conflicts_detected between sources
+-0.1 for each missing_data_flag that directly affects the primary finding
+-0.15 if EHR retrieval_confidence < 0.5
+Maximum: 0.95. Minimum: 0.10.
+
+URGENCY-APPROPRIATE RECOMMENDED ACTIONS:
+- CRITICAL: Focus on immediate escalation; note that full synthesis may be incomplete
+- URGENT: 2-4 specific, ordered, actionable steps
+- ROUTINE: 1-2 follow-up steps; no urgent language
+- INFORMATIONAL: 0-1 monitoring steps; explicitly state "No immediate action required for this alert"
+
+CHAIN-OF-THOUGHT (work through before writing):
+Step 1 — SAFETY CHECK: Any allergy conflict? If yes, flag immediately in data_quality_warning.
+Step 2 — RECONCILE: Consistent story across agents? List all conflicts explicitly.
+Step 3 — EXPLAIN: Most likely explanation using all three data sources.
+Step 4 — PRIORITISE: Single most important finding for the clinician.
+Step 5 — GAPS: What is missing that materially affects the CCB quality?
+Step 6 — SCORE: Calculate confidence_score using the rubric.
+
+DO NOT DIAGNOSE. DO NOT PRESCRIBE. DO NOT ORDER.
+Every recommendation is framed as "clinician should consider" or "warrants clinical assessment".
+
+OUTPUT FORMAT: Return valid JSON only.
+
+{
+  "patient_id": "string",
+  "generated_at": "ISO8601 datetime",
+  "alert_summary": {
+    "trigger": "string",
+    "urgency_classification": "Critical | Urgent | Routine | Informational",
+    "rationale": "1-2 sentences"
+  },
+  "patient_snapshot": {
+    "name": "string",
+    "active_conditions": ["list"],
+    "current_treatment_plan": "string",
+    "data_quality_warning": "string or null — ALLERGY CONFLICTS and sparse EHR go here prominently"
+  },
+  "contextual_analysis": {
+    "primary_finding": "2-3 sentences synthesising what the combined data most likely means",
+    "contributing_factors": ["list with source citations (EHR), (RPM), (Anamnesis)"],
+    "conflicts_detected": ["list of EHR-anamnesis conflicts, or empty array"],
+    "timeline": "narrative of how the situation developed, drawing on RPM trend + anamnesis diary"
+  },
+  "risk_assessment": {
+    "immediate_risks": "string",
+    "medium_term_risks": "string",
+    "differential_considerations": "2-3 explanations ordered by likelihood given evidence"
+  },
+  "recommended_actions": [
+    {
+      "action": "specific actionable step for clinician consideration",
+      "confidence": "High | Moderate | Low",
+      "evidence": "cite specific sources"
+    }
+  ],
+  "uncertainties_and_gaps": ["list of missing information that affects CCB quality"],
+  "confidence_score": 0.0,
+  "disclaimer": "This Clinical Context Brief is a decision-support summary generated by an AI prototype using simulated data. It does not constitute a diagnosis or treatment order. All clinical decisions require review and approval by a qualified physician. This system is not approved for use in real patient care."
+}"""
+
+
+# ── Agent class ────────────────────────────────────────────────────────────────
+
+class SynthesisAgent:
+    """
+    Synthesis Agent.
+    Combines Triage, EHR Retrieval, and Anamnesis outputs into a
+    structured Clinical Context Brief.
+    """
+
+    def __init__(self):
+        self.llm = ChatOpenAI(
+            model="gpt-4o",
+            temperature=0.1,    # Slightly more flexible for nuanced clinical narrative
+            model_kwargs={"response_format": {"type": "json_object"}},
+        )
+        self.prompt_version = "v2"
+
+    def _format_agent_outputs(
+        self,
+        alert: dict,
+        triage_output: dict,
+        ehr_context: dict,
+        anamnesis_summary: dict,
+    ) -> str:
+        """Format all agent outputs as a structured input for the synthesis LLM."""
+
+        # Strip internal metadata from agent outputs to keep prompt clean
+        triage_clean   = {k: v for k, v in triage_output.items()   if not k.startswith("_")}
+        ehr_clean      = {k: v for k, v in ehr_context.items()      if not k.startswith("_")}
+        anamnesis_clean = {k: v for k, v in anamnesis_summary.items() if not k.startswith("_")}
+
+        return f"""You must synthesise the following agent outputs into a Clinical Context Brief.
+
+=== ORIGINAL RPM ALERT ===
+{json.dumps(alert, indent=2)}
+
+=== TRIAGE AGENT OUTPUT ===
+{json.dumps(triage_clean, indent=2)}
+
+=== EHR RETRIEVAL AGENT OUTPUT ===
+{json.dumps(ehr_clean, indent=2)}
+
+=== ANAMNESIS AGENT OUTPUT ===
+{json.dumps(anamnesis_clean, indent=2)}
+
+Work through your chain-of-thought steps, then produce the Clinical Context Brief JSON.
+Remember: cite every claim with (EHR), (RPM), or (Anamnesis). Never diagnose. Order actions by urgency."""
+
+    def _validate_disclaimer(self, result: dict) -> dict:
+        """Ensure the mandatory disclaimer is present and correct."""
+        required_disclaimer = (
+            "This Clinical Context Brief is a decision-support summary generated by an AI prototype "
+            "using simulated data. It does not constitute a diagnosis or treatment order. All clinical "
+            "decisions require review and approval by a qualified physician. This system is not approved "
+            "for use in real patient care."
+        )
+        if not result.get("disclaimer"):
+            result["disclaimer"] = required_disclaimer
+        return result
+
+    def _validate_confidence_score(self, result: dict) -> dict:
+        """Ensure confidence_score is within valid bounds."""
+        score = result.get("confidence_score", 0.5)
+        result["confidence_score"] = max(0.10, min(0.95, float(score)))
+        return result
+
+    def run(
+        self,
+        alert: dict,
+        triage_output: dict,
+        ehr_context: dict,
+        anamnesis_summary: dict,
+    ) -> dict:
+        """
+        Run the Synthesis Agent.
+
+        Args:
+            alert: Original RPM alert data
+            triage_output: Output from Triage Agent
+            ehr_context: Output from EHR Retrieval Agent
+            anamnesis_summary: Output from Anamnesis Agent
+
+        Returns:
+            Structured Clinical Context Brief (CCB)
+        """
+        user_message = self._format_agent_outputs(
+            alert, triage_output, ehr_context, anamnesis_summary
+        )
+
+        messages = [
+            SystemMessage(content=SYNTHESIS_SYSTEM_PROMPT),
+            HumanMessage(content=user_message),
+        ]
+
+        response = self.llm.invoke(messages)
+
+        try:
+            result = json.loads(response.content)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Synthesis Agent returned invalid JSON: {e}")
+
+        # Post-processing validation
+        result = self._validate_disclaimer(result)
+        result = self._validate_confidence_score(result)
+
+        # Add metadata
+        result["_meta"] = {
+            "agent":          "SynthesisAgent",
+            "prompt_version": self.prompt_version,
+            "timestamp":      datetime.utcnow().isoformat(),
+            "input_agents":   ["TriageAgent", "EHRRetrievalAgent", "AnamnesisAgent"],
+        }
+
+        return result
+
+
+# ── Convenience function ──────────────────────────────────────────────────────
+
+def run_synthesis(
+    alert: dict,
+    triage_output: dict,
+    ehr_context: dict,
+    anamnesis_summary: dict,
+) -> dict:
+    """Convenience wrapper for the SynthesisAgent."""
+    agent = SynthesisAgent()
+    return agent.run(alert, triage_output, ehr_context, anamnesis_summary)

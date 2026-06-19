@@ -1,0 +1,348 @@
+{
+  "PT001": {
+    "patient_id": "PT001",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Headaches and feeling unwell for past few days",
+    "history_of_present_illness": "Patient Mehmet Yıldız reports persistent headaches for the past 4 days, mostly in the morning. He describes them as a dull pressure at the back of his head. He has felt generally unwell with occasional dizziness when standing up. He believes his blood pressure readings at home have been 'high lately' but has not documented exact values until this RPM device was provided.",
+    "medication_adherence": {
+      "self_reported_adherence": "Patient reports he stopped taking his Lisinopril approximately 10 days ago. He states the medication was giving him a persistent dry cough that was keeping him awake at night and embarrassing him in public. He decided to stop without consulting his doctor, intending to call to request a 'different pill'. He is still taking his Metformin and Aspirin as prescribed.",
+      "medications_taken_as_prescribed": ["Metformin 500mg twice daily", "Aspirin 81mg once daily"],
+      "medications_stopped_by_patient": [
+        {
+          "name": "Lisinopril 10mg",
+          "stopped_date_approx": "2026-05-22",
+          "reason": "Persistent dry cough — patient self-discontinued, not discussed with provider"
+        }
+      ],
+      "otc_medications": ["Ibuprofen 400mg occasionally for headaches (last 3 days)"]
+    },
+    "review_of_systems": {
+      "cardiovascular": "Headaches, occasional dizziness on standing, no chest pain, no palpitations",
+      "respiratory": "Persistent dry cough (prior to stopping Lisinopril) — now resolved",
+      "neurological": "Headaches, no vision changes, no numbness or weakness",
+      "general": "Fatigue, feeling unwell"
+    },
+    "social_history": {
+      "smoking": "Former smoker — quit 2008. 20 pack-year history.",
+      "alcohol": "Occasional — 1-2 drinks per week",
+      "diet": "High sodium diet acknowledged — patient admits to adding salt to most meals",
+      "exercise": "Minimal — sedentary lifestyle, walks occasionally",
+      "living_situation": "Lives with spouse"
+    },
+    "family_history": {
+      "hypertension": "Father — diagnosed in 50s, had stroke at 71",
+      "diabetes": "Mother — Type 2 diabetes",
+      "cardiovascular": "Brother — MI at age 58"
+    },
+    "patient_concerns": "Patient is concerned about his headaches and wants to know if he needs a different blood pressure medication. He expressed reluctance to return to any medication with a cough side effect.",
+    "symptom_diary": [
+      {"date": "2026-05-28", "notes": "Stopped Lisinopril about a week ago. Cough is better. Slight headache."},
+      {"date": "2026-05-29", "notes": "Headache worse in the morning. Took ibuprofen."},
+      {"date": "2026-05-30", "notes": "Headache again. Dizzy when I got up. Took ibuprofen again."},
+      {"date": "2026-05-31", "notes": "Still headache. BP machine showed 165/104 this morning — is that bad?"},
+      {"date": "2026-06-01", "notes": "Bad morning. Headache, BP 162/104. Called clinic."}
+    ],
+    "scenario_tag": "scenario_1_missed_medication"
+  },
+  "PT002": {
+    "patient_id": "PT002",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "CGM alarm — high glucose reading this morning",
+    "history_of_present_illness": "Patient Ayşe Kaya reports that her CGM alarm went off this morning after breakfast. She is not distressed by this because she expected her glucose to fluctuate. She started a supervised low-carbohydrate dietary program run by her clinic's nutritionist exactly one week ago. She understands that her body may take 2-4 weeks to adapt. Her glucose has been elevated especially after meals since starting the program, but is improving compared to the first few days.",
+    "medication_adherence": {
+      "self_reported_adherence": "Patient reports full adherence to all medications. Takes Metformin with breakfast and dinner, Glipizide with breakfast, and Atorvastatin at bedtime without fail.",
+      "medications_taken_as_prescribed": ["Metformin 1000mg twice daily", "Glipizide 5mg once daily with breakfast", "Atorvastatin 20mg at bedtime"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {
+      "endocrine": "Glucose fluctuating since dietary change — expected per nutritionist guidance",
+      "general": "Feeling well, no symptoms of hypoglycemia, no excessive thirst or urination beyond usual",
+      "cardiovascular": "No symptoms"
+    },
+    "social_history": {
+      "smoking": "Never smoker",
+      "alcohol": "Rare, 1-2 drinks monthly",
+      "diet": "Participating in supervised low-carbohydrate program since May 26, 2026. Prior diet was moderate carbohydrate.",
+      "exercise": "Walks 30 minutes daily",
+      "living_situation": "Lives alone"
+    },
+    "family_history": {
+      "diabetes": "Both parents — Type 2 diabetes",
+      "cardiovascular": "Mother — hypertension"
+    },
+    "patient_concerns": "Patient not worried. States 'my nutritionist told me this would happen for a few weeks.' She wants to confirm the CGM alarm does not need a clinical response.",
+    "symptom_diary": [
+      {"date": "2026-05-26", "notes": "First day of new diet. Ate low-carb breakfast. Glucose 204 post-meal — higher than usual."},
+      {"date": "2026-05-27", "notes": "Glucose running high after meals but fasting is okay."},
+      {"date": "2026-05-29", "notes": "Nutritionist says body will adapt. Still taking all my pills."},
+      {"date": "2026-06-01", "notes": "CGM alarmed this morning after breakfast. 218 mg/dL. Called clinic but I think it's fine."}
+    ],
+    "scenario_tag": "scenario_2_false_alarm"
+  },
+  "PT003": {
+    "patient_id": "PT003",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Gradual weight increase noticed — ankles swollen",
+    "history_of_present_illness": "Patient Hasan Demir has noticed his weight has been gradually increasing over the past two weeks. He weighed himself daily as instructed and has been tracking the numbers. He initially attributed the weight gain to 'eating a bit more' but is now concerned because his ankles have been swollen especially in the evenings. He reports feeling more short of breath when climbing stairs over the past 3-4 days. He has not increased his salt intake significantly.",
+    "medication_adherence": {
+      "self_reported_adherence": "Patient reports taking all medications as prescribed. Takes Furosemide every morning. Has not missed any doses.",
+      "medications_taken_as_prescribed": ["Furosemide 40mg once daily", "Carvedilol 6.25mg twice daily", "Lisinopril 5mg once daily", "Apixaban 5mg twice daily"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": ["Ibuprofen 400mg — patient reports taking 2-3 times over the past week for 'joint pains in knees'"]
+    },
+    "review_of_systems": {
+      "cardiovascular": "Weight gain 6.2kg over 2 weeks. Ankle swelling bilateral, worse in evenings. Mild shortness of breath on exertion (stairs). No chest pain. No palpitations.",
+      "respiratory": "Mild exertional dyspnea — new over last 3-4 days. No orthopnea reported yet.",
+      "renal_fluid": "Urine output seems normal per patient. Ankles swollen.",
+      "general": "Fatigue, feeling heavier and sluggish"
+    },
+    "social_history": {
+      "smoking": "Former smoker — quit 2000",
+      "alcohol": "Rare",
+      "diet": "Low sodium diet attempted but patient admits to a 'salty restaurant meal' about 10 days ago",
+      "exercise": "Limited due to breathlessness",
+      "living_situation": "Lives with daughter"
+    },
+    "family_history": {
+      "cardiovascular": "Father — died of heart failure. Mother — hypertension."
+    },
+    "patient_concerns": "Patient is worried. States 'Last time my ankles swelled like this I ended up in hospital.' Asking if he should come in today.",
+    "symptom_diary": [
+      {"date": "2026-05-20", "notes": "Weight 85kg. Feeling okay."},
+      {"date": "2026-05-22", "notes": "Weight 85.2kg. Took ibuprofen for knee."},
+      {"date": "2026-05-24", "notes": "Weight 86.1kg. Ankles look a bit puffy in evening."},
+      {"date": "2026-05-26", "notes": "Weight 86.8kg. Ankles definitely swollen. Took ibuprofen again."},
+      {"date": "2026-05-28", "notes": "Weight 87.3kg — above my limit. Ankles swollen. Stairs getting harder."},
+      {"date": "2026-05-30", "notes": "Weight 89.5kg. I'm worried. Shortness of breath on stairs."},
+      {"date": "2026-06-01", "notes": "Weight 91.2kg. That's over 6kg in 2 weeks. Ankles very swollen. Called clinic."}
+    ],
+    "scenario_tag": "scenario_3_silent_deterioration"
+  },
+  "PT004": {
+    "patient_id": "PT004",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "High blood pressure readings at home for several days",
+    "history_of_present_illness": "Patient Elif Şahin is a relatively new patient who transferred to this practice approximately 2.5 years ago. She reports her blood pressure has been very high at home for the past several days, consistently around 165-170 systolic. She has been taking Amlodipine as prescribed. She is unsure about her full medical history as her previous records have not been fully transferred. She mentions she has been 'quite stressed lately' due to a family situation and has not been sleeping well.",
+    "medication_adherence": {
+      "self_reported_adherence": "Patient reports taking Amlodipine 5mg every morning without fail.",
+      "medications_taken_as_prescribed": ["Amlodipine 5mg once daily"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": ["Decongestant (pseudoephedrine-based) cold medication — patient mentions taking this for a cold for the past 5 days"]
+    },
+    "review_of_systems": {
+      "cardiovascular": "Elevated BP at home. Occasional headaches. No chest pain.",
+      "respiratory": "Mild cold symptoms, nasal congestion — treating with OTC cold medicine",
+      "general": "Stress, poor sleep for 1 week",
+      "neurological": "Headaches with hypertension"
+    },
+    "social_history": {
+      "smoking": "Never smoker — reported",
+      "alcohol": "Occasional",
+      "diet": "Patient unsure of prior dietary history. Describes current diet as 'fairly normal.'",
+      "exercise": "Goes for walks 3-4 times per week",
+      "living_situation": "Lives with family — currently under significant family stress (caretaking for ill parent)"
+    },
+    "family_history": {
+      "patient_unsure": "Patient unsure of detailed family history — states she was adopted and has limited information. Knows her biological mother had 'some heart condition' but no details.",
+      "hypertension": "Unknown",
+      "diabetes": "Unknown"
+    },
+    "patient_concerns": "Patient wants to know if her BP medication needs to be increased. She is concerned but says she 'does not want to take more pills if possible.'",
+    "symptom_diary": [
+      {"date": "2026-05-27", "notes": "Started OTC cold medicine. BP seemed higher than usual."},
+      {"date": "2026-05-28", "notes": "BP 164/106 this morning. Still taking cold medicine."},
+      {"date": "2026-05-29", "notes": "BP 160/102. Headache. Still have cold."},
+      {"date": "2026-06-01", "notes": "BP 168/108. Called clinic. Still stressed and not sleeping."}
+    ],
+    "scenario_tag": "scenario_4_incomplete_record"
+  },
+  "PT005": {
+    "patient_id": "PT005",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Blood pressure very high — BP monitor alarming repeatedly",
+    "history_of_present_illness": "Patient Kemal Aydın reports his home BP monitor has been showing very high readings for the past several days. He insists he has been taking his Metoprolol every day without exception. He is frustrated and says 'the medication just isn't working.' He appears agitated during intake. He denies any increased alcohol consumption when asked directly, stating he has 'maybe one drink in the evening, nothing more.' He mentions he has not been sleeping well.",
+    "medication_adherence": {
+      "self_reported_adherence": "Patient emphatically states full adherence to Metoprolol and Rosuvastatin. 'I take it every single morning, I never miss it.'",
+      "medications_taken_as_prescribed": ["Metoprolol succinate 50mg once daily — per patient report", "Rosuvastatin 10mg once daily"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {
+      "cardiovascular": "Persistently elevated BP. No chest pain. No palpitations.",
+      "hepatic": "Denies any symptoms of liver disease. No jaundice, no abdominal pain.",
+      "general": "Poor sleep. Increased stress at work.",
+      "neurological": "Occasional headaches with high BP"
+    },
+    "social_history": {
+      "smoking": "Never smoker",
+      "alcohol": "Patient self-reports: 'one drink in the evening, sometimes two on weekends.' Defensive when asked about alcohol use. History of alcohol use disorder in medical records.",
+      "diet": "High calorie diet. Does not exercise regularly.",
+      "exercise": "Minimal",
+      "living_situation": "Lives alone since divorce 3 years ago"
+    },
+    "family_history": {
+      "hypertension": "Both parents had hypertension",
+      "cardiovascular": "Father — MI at 65"
+    },
+    "patient_concerns": "Patient insists medication is ineffective and wants a stronger blood pressure medication. He is defensive about his lifestyle. States he wants 'something that actually works.'",
+    "symptom_diary": [
+      {"date": "2026-05-28", "notes": "BP high again. I took my pill I promise."},
+      {"date": "2026-05-30", "notes": "BP 168/110. Took pill. Don't understand why it's not working."},
+      {"date": "2026-06-01", "notes": "BP 174/112 this morning. Very frustrated. Called clinic."}
+    ],
+    "scenario_tag": "scenario_5_conflicting_data"
+  },
+  "PT006": {
+    "patient_id": "PT006",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Routine monitoring check-in",
+    "history_of_present_illness": "Patient Beatrice Osei reports feeling generally stable today. No acute complaints. Following low-potassium diet as advised. Some mild fatigue in the afternoons.",
+    "medication_adherence": {
+      "self_reported_adherence": "Full adherence to all medications reported.",
+      "medications_taken_as_prescribed": ["Losartan 50mg", "Insulin glargine 20 units at bedtime", "Amlodipine 5mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Mild fatigue. No edema. No chest pain."},
+    "social_history": {"diet": "Following low-potassium and low-sodium diet per dietitian advice"},
+    "family_history": {},
+    "patient_concerns": "Patient wants to know when she will need dialysis.",
+    "scenario_tag": "general"
+  },
+  "PT007": {
+    "patient_id": "PT007",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Difficulty breathing — worse than usual this morning",
+    "history_of_present_illness": "Patient Thomas Eriksson reports waking this morning with increased difficulty breathing. SpO2 monitor alarmed. Ankles swollen. Took extra Furosemide dose without consulting physician.",
+    "medication_adherence": {
+      "self_reported_adherence": "Generally compliant. Took an extra Furosemide dose this morning on his own initiative.",
+      "medications_taken_as_prescribed": [],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"cardiovascular": "Worsening dyspnea. Ankle edema. Low SpO2.", "respiratory": "Dyspnea worse than usual. Uses COPD inhaler."},
+    "patient_concerns": "Concerned about breathing. Asks if he needs emergency care.",
+    "scenario_tag": "general"
+  },
+  "PT008": {
+    "patient_id": "PT008",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Routine BP check",
+    "history_of_present_illness": "Patient Grace Abara reports no acute symptoms today. Borderline high BP reading noted on home monitor. No headache. No dizziness. Reports eating a high-sodium meal at a restaurant last night.",
+    "medication_adherence": {
+      "self_reported_adherence": "Takes HCTZ daily.",
+      "medications_taken_as_prescribed": ["Hydrochlorothiazide 25mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "No acute symptoms"},
+    "patient_concerns": "Wants to know if her potassium supplements are sufficient.",
+    "scenario_tag": "general"
+  },
+  "PT009": {
+    "patient_id": "PT009",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Caregiver check-in",
+    "history_of_present_illness": "Caregiver (daughter) reporting on behalf of patient Raymond Castillo. Patient has Alzheimer's and cannot reliably report own symptoms. BP readings have been normal this week. Patient occasionally confused and resistive to medications. Caregiver managing medications from pill organizer.",
+    "medication_adherence": {
+      "self_reported_adherence": "Caregiver reports 80% adherence — patient occasionally refuses morning medications.",
+      "medications_taken_as_prescribed": [],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Stable per caregiver. Moderate cognitive decline. No new symptoms."},
+    "patient_concerns": "Caregiver wants guidance on managing medication refusals.",
+    "scenario_tag": "general"
+  },
+  "PT010": {
+    "patient_id": "PT010",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Routine daily check-in",
+    "history_of_present_illness": "Patient Linda Okonkwo reports feeling well today. Glucose readings have been good on Empagliflozin. BP stable. No complaints.",
+    "medication_adherence": {
+      "self_reported_adherence": "Full adherence.",
+      "medications_taken_as_prescribed": ["Empagliflozin 10mg", "Metformin 1000mg twice daily", "Lisinopril 20mg", "Atorvastatin 40mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Feels well"},
+    "patient_concerns": "None today.",
+    "scenario_tag": "general"
+  },
+  "PT011": {
+    "patient_id": "PT011",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Weight stable today",
+    "history_of_present_illness": "Patient Samuel Brinkmann reports weight unchanged. No ankle swelling. Mild fatigue but attributed to poor sleep. Taking all medications.",
+    "medication_adherence": {
+      "self_reported_adherence": "Full adherence.",
+      "medications_taken_as_prescribed": ["Furosemide 40mg", "Metoprolol succinate 25mg", "Lisinopril 5mg", "Metformin 500mg twice daily"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Mild fatigue. No edema."},
+    "patient_concerns": "None acute.",
+    "scenario_tag": "general"
+  },
+  "PT012": {
+    "patient_id": "PT012",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Routine BP check",
+    "history_of_present_illness": "Patient Patricia Sinclair reports feeling well. BP reading within normal range. Mood stable on Sertraline. No side effects.",
+    "medication_adherence": {
+      "self_reported_adherence": "Full adherence.",
+      "medications_taken_as_prescribed": ["Ramipril 5mg", "Sertraline 50mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Feeling well. Mood stable."},
+    "patient_concerns": "None.",
+    "scenario_tag": "general"
+  },
+  "PT013": {
+    "patient_id": "PT013",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Glucose reading borderline high",
+    "history_of_present_illness": "Patient Victor Pham — elderly patient with CKD stage 4 and diabetes. Son reports patient had a larger evening meal last night. CGM shows borderline glucose. Patient otherwise stable and resting at home.",
+    "medication_adherence": {
+      "self_reported_adherence": "Son administers medications — full adherence reported.",
+      "medications_taken_as_prescribed": ["Insulin glargine 24 units at bedtime", "Amlodipine 5mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Stable. Fatigue. CKD-related symptoms unchanged."},
+    "patient_concerns": "Son asking about dialysis timeline.",
+    "scenario_tag": "general"
+  },
+  "PT014": {
+    "patient_id": "PT014",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Routine check",
+    "history_of_present_illness": "Patient Angela Torres reporting normal BP readings. Back pain improving with physiotherapy. Reduced naproxen use to once weekly.",
+    "medication_adherence": {
+      "self_reported_adherence": "Taking Lisinopril daily. Naproxen use now reduced as advised.",
+      "medications_taken_as_prescribed": ["Lisinopril 5mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": ["Naproxen 500mg — once weekly only, as discussed"]
+    },
+    "review_of_systems": {"general": "Back improving. BP stable."},
+    "patient_concerns": "None acute.",
+    "scenario_tag": "general"
+  },
+  "PT015": {
+    "patient_id": "PT015",
+    "intake_date": "2026-06-01",
+    "chief_complaint": "Routine daily check-in",
+    "history_of_present_illness": "Patient Dwight Pearson reports feeling well. Glucose within range. BP readings good this week. Hip replacement site has no pain.",
+    "medication_adherence": {
+      "self_reported_adherence": "Full adherence.",
+      "medications_taken_as_prescribed": ["Sitagliptin 100mg", "Metformin 1000mg twice daily", "Valsartan 80mg"],
+      "medications_stopped_by_patient": [],
+      "otc_medications": []
+    },
+    "review_of_systems": {"general": "Feels well"},
+    "patient_concerns": "None.",
+    "scenario_tag": "general"
+  }
+}
